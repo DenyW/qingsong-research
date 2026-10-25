@@ -1,3 +1,5 @@
+import { patents } from './patents';
+
 export type Lang = 'en' | 'zh';
 
 export type Localized<T = string> = Record<Lang, T>;
@@ -47,17 +49,6 @@ export interface FundingItem {
   reference?: string;
 }
 
-export interface PatentItem {
-  title: string;
-  number: string;
-  application: string;
-  filed: string;
-  status: 'Granted' | 'Pending' | 'Expired';
-  statusNote: string;
-  assignee: string;
-  href: string;
-}
-
 export interface SkillGroup {
   label: string;
   items: string[];
@@ -78,7 +69,7 @@ export const site = {
   givenName: 'Qingsong',
   familyName: 'Wei',
   initials: 'Q',
-  url: 'https://qingsong-research.drwell86.workers.dev',
+  url: 'https://qingsong-research.qsw-wei.workers.dev',
   email: 'wqs@zstu.edu.cn',
   location,
   role: {
@@ -94,14 +85,14 @@ export const site = {
     zh: '我是 Qingsong Wei，讲师（助理教授），研究三维机织物与纺织复合材料在弹道冲击下的响应。我的工作结合细观有限元建模、气炮实验与织物结构层面的设计。这个网站收集那些正在公开的工作。',
   },
   portrait: {
-    src: '/images/portrait-placeholder.svg',
+    src: '/images/portrait.jpg',
     alt: {
-      en: 'Abstract portrait placeholder with a large Q monogram',
-      zh: '带有巨大 Q 字母组合的抽象人像占位图',
+      en: 'Portrait of Qingsong Wei',
+      zh: 'Qingsong Wei 的肖像照',
     },
     caption: {
-      en: 'Portrait placeholder · 4:5',
-      zh: '照片占位 · 4:5',
+      en: 'Qingsong Wei',
+      zh: 'Qingsong Wei',
     },
   },
   socials: [
@@ -387,49 +378,7 @@ export const site = {
       reference: '51875099',
     },
   ] satisfies FundingItem[],
-  patents: [
-    {
-      title:
-        'An experimental testing method and apparatus for determining the impact resistance of fabrics',
-      number: 'CN120142045B',
-      application: 'CN202510298810.8',
-      filed: '13 Mar 2025',
-      status: 'Granted',
-      statusNote: 'Published 13 Jun 2025 · granted 18 Nov 2025 · active',
-      assignee: 'Zhejiang Sci-Tech University',
-      href: 'https://patents.google.com/patent/CN120142045B/en',
-    },
-    {
-      title: 'Production process of seamless one-piece bulletproof helmet',
-      number: 'CN119753913A',
-      application: 'CN202510052858.0',
-      filed: '14 Jan 2025',
-      status: 'Pending',
-      statusNote: 'Published 4 Apr 2025 · rejection issued 26 Jun 2026',
-      assignee: 'Zhejiang Sci-Tech University',
-      href: 'https://patents.google.com/patent/CN119753913A/en',
-    },
-    {
-      title: 'A three-way woven bulletproof structure',
-      number: 'CN119374415A',
-      application: 'CN202411852079.0',
-      filed: '16 Dec 2024',
-      status: 'Pending',
-      statusNote: 'Published 28 Jan 2025 · under examination',
-      assignee: 'Zhejiang Sci-Tech University',
-      href: 'https://patents.google.com/patent/CN119374415A/en',
-    },
-    {
-      title: 'Surrounding type bulletproof and stab-resistant schoolbag',
-      number: 'CN210008649U',
-      application: 'CN201920255550.6U',
-      filed: '28 Feb 2019',
-      status: 'Expired',
-      statusNote: 'Granted 4 Feb 2020 · expired 28 Feb 2023 (annual fee)',
-      assignee: 'Donghua University',
-      href: 'https://patents.google.com/patent/CN210008649U/en',
-    },
-  ] satisfies PatentItem[],
+  patents,
   skills: [
     {
       label: 'FEA & simulation',

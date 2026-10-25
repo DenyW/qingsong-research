@@ -4,18 +4,21 @@ The personal research website of **Qingsong Wei**, built with
 [Astro](https://astro.build) and deployed as static assets on
 [Cloudflare Workers](https://workers.cloudflare.com).
 
-- Live site: <https://qingsong-research.drwell86.workers.dev>
+- Live site: <https://qingsong-research.qsw-wei.workers.dev>
 - GitHub: <https://github.com/DenyW/qingsong-research>
 - Language: English
 
 ## What is included
 
-- **Homepage** — portrait placeholder, research directions, selected
+- **Homepage** — portrait photograph, research directions, selected
   publications, open-source projects, field notes, experience, research funding,
-  patents, methods, and contact.
+  selected patents, methods, and contact.
 - **Publications** — all 27 peer-reviewed journal articles, grouped by year,
   with DOI links and the author's name highlighted. Available at
   `/publications/`.
+- **Patents** — 52 records listing Qingsong Wei as an inventor, grouped by
+  filing year, with publication numbers, filing dates, assignees, and Google
+  Patents links. Available at `/patents/`.
 - **Field notes** — three essays with an RSS feed at `/rss.xml`.
 - **SEO** — sitemap, canonical URLs, Open Graph metadata, and JSON-LD for the
   person, collection pages, and articles.
@@ -33,14 +36,15 @@ or a document supplied by Qingsong Wei.
 - [Crossref](https://www.crossref.org/) metadata for publication details
 - Curriculum vitae, August 2026, for the current appointment, education,
   research funding, patent numbers, technical skills, and service roles
-- [Google Patents](https://patents.google.com/) for patent titles, application
-  numbers, dates, assignees, and legal status
+- [Google Patents](https://patents.google.com/) for patent titles, publication
+  numbers, filing dates, and assignees
 - Public GitHub repositories for the projects section
 
 Publication titles, author order, journal names, volumes, and DOIs follow the
 Crossref record. Employment, education, funding, and service details follow the
-CV and ORCID record. Patent records follow the CV and were checked against
-Google Patents in October 2026.
+CV and ORCID record. Patent records were checked against Google Patents in
+October 2026 and list only records where Qingsong Wei appears as an inventor;
+the site makes no legal-status assessment.
 
 ## Local development
 
@@ -98,9 +102,8 @@ public/            static assets, headers, manifest
 
 ## Placeholders and privacy
 
-- **Portrait** — `public/images/portrait-placeholder.svg` is an abstract
-  placeholder. Replace it with an authorized 4:5 photograph and update the
-  `portrait` entry in `src/data/site.ts`.
+- **Portrait** — `public/images/portrait.jpg` is the authorized 4:5 photograph
+  used on the homepage.
 - **Phone number** — the CV includes a phone number, but it is intentionally not
   published. Use the institutional email address for contact.
 - **Chinese name** — the site is English-only. A Chinese character form has not

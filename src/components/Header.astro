@@ -1,7 +1,7 @@
 ---
 import type { Lang } from '../data/site';
 import { site } from '../data/site';
-import { homePath, insightsPath, publicationsPath } from '../i18n/utils';
+import { homePath, insightsPath, patentsPath, publicationsPath } from '../i18n/utils';
 import { t, type UIKey } from '../i18n/ui';
 import Icon from './Icon.astro';
 
@@ -14,10 +14,12 @@ const { lang, pathname } = Astro.props;
 const home = homePath(lang);
 const notes = insightsPath(lang);
 const papers = publicationsPath(lang);
+const patents = patentsPath(lang);
 
 const nav: Array<{ key: UIKey; href: string; current?: boolean }> = [
   { key: 'nav.research', href: `${home}#research` },
   { key: 'nav.publications', href: papers, current: pathname.includes('/publications') },
+  { key: 'nav.patents', href: patents, current: pathname.includes('/patents') },
   { key: 'nav.projects', href: `${home}#projects` },
   { key: 'nav.insights', href: notes, current: pathname.includes('/insights') },
   { key: 'nav.experience', href: `${home}#experience` },

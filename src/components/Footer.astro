@@ -1,7 +1,7 @@
 ---
 import type { Lang } from '../data/site';
 import { site } from '../data/site';
-import { homePath, insightsPath, publicationsPath } from '../i18n/utils';
+import { homePath, insightsPath, patentsPath, publicationsPath } from '../i18n/utils';
 import { t } from '../i18n/ui';
 import Icon from './Icon.astro';
 
@@ -13,12 +13,14 @@ const { lang } = Astro.props;
 const home = homePath(lang);
 const notes = insightsPath(lang);
 const papers = publicationsPath(lang);
+const patents = patentsPath(lang);
 const year = new Date().getFullYear();
 const rssHref = '/rss.xml';
 
 const nav = [
   { label: t(lang, 'nav.research'), href: `${home}#research` },
   { label: t(lang, 'nav.publications'), href: papers },
+  { label: t(lang, 'nav.patents'), href: patents },
   { label: t(lang, 'nav.projects'), href: `${home}#projects` },
   { label: t(lang, 'nav.insights'), href: notes },
   { label: t(lang, 'nav.experience'), href: `${home}#experience` },

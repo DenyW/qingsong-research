@@ -1,6 +1,7 @@
 ---
 import type { Lang } from '../data/site';
 import { site } from '../data/site';
+import { patentsPath } from '../i18n/utils';
 import { t } from '../i18n/ui';
 import Icon from './Icon.astro';
 import SectionHead from './SectionHead.astro';
@@ -10,6 +11,15 @@ interface Props {
 }
 
 const { lang } = Astro.props;
+const featuredPatents = site.patents.filter((patent) => patent.featured);
+
+const formatDate = (iso: string) =>
+  new Intl.DateTimeFormat('en-GB', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+    timeZone: 'UTC',
+  }).format(new Date(`${iso}T00:00:00Z`));
 ---
 
 <section id="funding" class="section section--funding">
@@ -19,6 +29,7 @@ const { lang } = Astro.props;
       kicker={t(lang, 'section.funding')}
       title={t(lang, 'section.fundingTitle')}
       lede={t(lang, 'section.fundingLede')}
+      link={{ href: patentsPath(lang), label: t(lang, 'patents.viewAll') }}
     />
 
     <div class="funding-layout">
@@ -51,26 +62,22 @@ const { lang } = Astro.props;
 
       <div class="funding-column">
         <div class="funding-column-head">
-          <h3 class="mono">{t(lang, 'funding.patents')}</h3>
-          <span class="mono funding-count">{site.patents.length}</span>
+          <h3 class="mono">{t(lang, 'patents.selected')}</h3>
+          <span class="mono funding-count">{featuredPatents.length}</span>
         </div>
 
         <ol class="patent-list">
-          {site.patents.map((patent, index) => (
+          {featuredPatents.map((patent, index) => (
             <li class="patent-item">
               <span class="mono patent-index">{String(index + 1).padStart(2, '0')}</span>
               <div class="patent-body">
                 <div class="patent-topline">
-                  <span class:list={['patent-status', `is-${patent.status.toLowerCase()}`]}>
-                    {patent.status}
+                  <span class="mono patent-filed">
+                    {t(lang, 'patents.filed')} {formatDate(patent.filed)}
                   </span>
-                  <span class="mono patent-filed">Filed {patent.filed}</span>
                 </div>
                 <h4>{patent.title}</h4>
-                <p class="mono patent-number">
-                  {patent.number} · App. {patent.application}
-                </p>
-                <p class="patent-status-note">{patent.statusNote}</p>
+                <p class="mono patent-number">{patent.number}</p>
                 <p class="patent-assignee">
                   <span>{patent.assignee}</span>
                   <span aria-hidden="true">·</span>

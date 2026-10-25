@@ -1,0 +1,146 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import type { Lang } from '../data/site';
+import { site } from '../data/site';
+import { t } from '../i18n/ui';
+import Icon from './Icon.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const base = Astro.site ?? new URL(site.url);
+const pageUrl = new URL('/patents/', base);
+
+const patents = [...site.patents].sort((a, b) => b.filed.localeCompare(a.filed));
+const years = [...new Set(patents.map((patent) => patent.filed.slice(0, 4)))].sort((a, b) =>
+  b.localeCompare(a),
+);
+const patentsByYear = Object.fromEntries(
+  years.map((year) => [year, patents.filter((patent) => patent.filed.startsWith(year))]),
+) as Record<string, typeof patents>;
+const total = patents.length;
+const firstYear = Math.min(...patents.map((patent) => Number(patent.filed.slice(0, 4))));
+const lastYear = Math.max(...patents.map((patent) => Number(patent.filed.slice(0, 4))));
+const assigneeCount = new Set(patents.map((patent) => patent.assignee)).size;
+
+const formatDate = (iso: string) =>
+  new Intl.DateTimeFormat('en-GB', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+    timeZone: 'UTC',
+  }).format(new Date(`${iso}T00:00:00Z`));
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: t(lang, 'patents.pageTitle'),
+  description: t(lang, 'patents.pageLede'),
+  url: pageUrl.toString(),
+  inLanguage: 'en',
+  mainEntity: {
+    '@type': 'ItemList',
+    numberOfItems: total,
+    itemListElement: patents.map((patent, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      item: {
+        '@type': 'Patent',
+        name: patent.title,
+        identifier: patent.number,
+        url: patent.href,
+        inventor: { '@type': 'Person', name: site.name },
+        assignee: { '@type': 'Organization', name: patent.assignee },
+      },
+    })),
+  },
+};
+---
+
+<BaseLayout
+  lang={lang}
+  title={t(lang, 'meta.patentsTitle')}
+  description={t(lang, 'meta.patentsDescription')}
+  jsonLd={schema}
+>
+  <section class="page-header">
+    <div class="container">
+      <div class="page-kicker mono">06 — {t(lang, 'section.patents')}</div>
+      <div class="page-header-grid page-header-grid--publications">
+        <div>
+          <h1 class="page-title">{t(lang, 'patents.pageTitle')}</h1>
+          <p class="page-lede">{t(lang, 'patents.pageLede')}</p>
+        </div>
+        <dl class="pub-stats">
+          <div class="pub-stat">
+            <dt class="mono">{t(lang, 'patents.statsTotal')}</dt>
+            <dd>{total}</dd>
+          </div>
+          <div class="pub-stat">
+            <dt class="mono">{t(lang, 'patents.statsYears')}</dt>
+            <dd class="pub-stat-range">{firstYear}–{lastYear}</dd>
+          </div>
+          <div class="pub-stat">
+            <dt class="mono">{t(lang, 'patents.statsAssignees')}</dt>
+            <dd>{assigneeCount}</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="publications-page">
+    <div class="container">
+      <div class="pub-toolbar">
+        <p class="pub-source-note">{t(lang, 'patents.sourceNote')}</p>
+        <span class="mono pub-updated">{t(lang, 'patents.updated')}</span>
+      </div>
+
+      {years.map((year) => (
+        <section class="pub-year-group" aria-labelledby={`patent-year-${year}`}>
+          <div class="pub-year-head">
+            <h2 id={`patent-year-${year}`}>{year}</h2>
+            <span class="mono">
+              {patentsByYear[year].length} {t(lang, 'patents.records')}
+            </span>
+          </div>
+
+          <ol class="publication-list publication-list--page patent-page-list">
+            {patentsByYear[year].map((patent, index) => (
+              <li class="publication-item publication-item--page patent-page-item">
+                <span class="mono publication-index">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <div class="publication-main">
+                  <h3>
+                    <a href={patent.href} target="_blank" rel="noopener noreferrer">
+                      {patent.title}
+                    </a>
+                  </h3>
+                  <p class="publication-venue">
+                    <span>{patent.number}</span>
+                    <span aria-hidden="true">·</span>
+                    <span>{t(lang, 'patents.filed')} {formatDate(patent.filed)}</span>
+                    <span aria-hidden="true">·</span>
+                    <span>{patent.assignee}</span>
+                  </p>
+                </div>
+                <a
+                  class="publication-link"
+                  href={patent.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${t(lang, 'patents.google')}: ${patent.title}`}
+                >
+                  <Icon name="arrow-up-right" size={18} />
+                </a>
+              </li>
+            ))}
+          </ol>
+        </section>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

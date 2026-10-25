@@ -1,7 +1,7 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
-const site = process.env.SITE_URL ?? 'https://qingsong-research.drwell86.workers.dev';
+const site = process.env.SITE_URL ?? 'https://qingsong-research.qsw-wei.workers.dev';
 
 export default defineConfig({
   site,

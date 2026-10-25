@@ -1123,6 +1123,12 @@ main {
   line-height: 1.12;
 }
 
+.patent-page-item .publication-venue {
+  font-size: 0.64rem;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
 .publication-doi {
   display: inline-flex;
   flex-wrap: wrap;
@@ -1520,32 +1526,6 @@ main {
   gap: 8px;
 }
 
-.patent-status {
-  display: inline-flex;
-  padding: 2px 7px;
-  border: 1px solid var(--line-strong);
-  border-radius: 999px;
-  font-family: var(--mono);
-  font-size: 0.46rem;
-  letter-spacing: 0.06em;
-  line-height: 1.3;
-  text-transform: uppercase;
-}
-
-.patent-status.is-granted {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
-.patent-status.is-pending {
-  color: var(--ink-soft);
-}
-
-.patent-status.is-expired {
-  border-color: var(--line);
-  color: var(--muted);
-}
-
 .patent-filed {
   color: var(--muted);
   font-size: 0.5rem;
@@ -1562,13 +1542,6 @@ main {
   margin-top: 4px;
   color: var(--muted);
   font-size: 0.54rem;
-}
-
-.patent-status-note {
-  margin-top: 5px;
-  color: var(--ink-soft);
-  font-size: 0.72rem;
-  line-height: 1.5;
 }
 
 .patent-assignee {

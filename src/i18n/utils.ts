@@ -16,6 +16,10 @@ export function publicationsPath(_lang?: Lang): string {
   return '/publications/';
 }
 
+export function patentsPath(_lang?: Lang): string {
+  return '/patents/';
+}
+
 export function insightPath(slug: string, _lang?: Lang): string {
   return `/insights/${slug}/`;
 }

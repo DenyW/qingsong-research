@@ -16,6 +16,7 @@ const en = {
   'nav.home': 'Home',
   'nav.research': 'Research',
   'nav.publications': 'Publications',
+  'nav.patents': 'Patents',
   'nav.projects': 'Projects',
   'nav.insights': 'Field notes',
   'nav.experience': 'Experience',
@@ -42,7 +43,8 @@ const en = {
   'section.funding': 'Funding & patents',
   'section.fundingTitle': 'Work behind the papers',
   'section.fundingLede':
-    'Research funding, patents, and the methods that support the modelling and experiments. Funding follows the CV updated in August 2026; patent records and legal status follow Google Patents.',
+    'Research funding, selected patents, and the methods that support the modelling and experiments. Funding follows the CV updated in August 2026; patent records follow Google Patents.',
+  'section.patents': 'Patents',
   'section.contact': 'Contact',
 
   'publications.verified': 'Verified against ORCID & Crossref',
@@ -73,7 +75,22 @@ const en = {
   'funding.pi': 'PI',
   'funding.coi': 'Co-I',
   'funding.source':
-    'Sources: CV (August 2026); patent data and status via Google Patents (October 2026).',
+    'Sources: CV (August 2026); patent data via Google Patents (October 2026).',
+
+  'patents.pageTitle': 'Patents',
+  'patents.pageLede':
+    'Patent records listing Qingsong Wei as an inventor. Publication numbers, filing dates, and assignees follow the indexed Google Patents records.',
+  'patents.statsTotal': 'patent records',
+  'patents.statsYears': 'years covered',
+  'patents.statsAssignees': 'assignees',
+  'patents.sourceNote':
+    'Source: Google Patents records indexed under the inventor name Qingsong Wei. Titles use the English record where available; no legal-status assessment is made here.',
+  'patents.updated': 'Last updated October 2026',
+  'patents.records': 'records',
+  'patents.filed': 'Filed',
+  'patents.google': 'Open on Google Patents',
+  'patents.viewAll': 'All patents',
+  'patents.selected': 'Selected patents',
 
   'projects.github': 'More on GitHub',
   'projects.view': 'View project',
@@ -116,6 +133,9 @@ const en = {
   'meta.publicationsTitle': 'Publications',
   'meta.publicationsDescription':
     'Peer-reviewed publications by Qingsong Wei on 3D woven fabric composites, ballistic impact, and textile modelling.',
+  'meta.patentsTitle': 'Patents',
+  'meta.patentsDescription':
+    'Patent records listing Qingsong Wei as an inventor, covering protective textiles, ballistic composites, and testing methods.',
   'meta.notFoundTitle': 'Page not found',
 } as const;
 
@@ -135,6 +155,7 @@ const zh: Record<keyof typeof en, string> = {
   'nav.home': '首页',
   'nav.research': '研究',
   'nav.publications': '论文',
+  'nav.patents': '专利',
   'nav.projects': '项目',
   'nav.insights': '笔记',
   'nav.experience': '经历',
@@ -161,7 +182,8 @@ const zh: Record<keyof typeof en, string> = {
   'section.funding': '经费与专利',
   'section.fundingTitle': '论文背后的工作',
   'section.fundingLede':
-    '研究经费、专利，以及支撑建模与实验的方法。经费信息依据 2026 年 8 月更新的简历；专利记录与法律状态依据 Google Patents。',
+    '研究经费、代表性专利，以及支撑建模与实验的方法。经费信息依据 2026 年 8 月更新的简历；专利记录依据 Google Patents。',
+  'section.patents': '专利',
   'section.contact': '联系',
 
   'publications.verified': '经 ORCID 与 Crossref 核验',
@@ -191,7 +213,22 @@ const zh: Record<keyof typeof en, string> = {
   'funding.methods': '方法与工具',
   'funding.pi': '主持',
   'funding.coi': '参与',
-  'funding.source': '来源：2026 年 8 月简历；专利数据与状态来自 Google Patents（2026 年 10 月）。',
+  'funding.source': '来源：2026 年 8 月简历；专利数据来自 Google Patents（2026 年 10 月）。',
+
+  'patents.pageTitle': '专利',
+  'patents.pageLede':
+    '发明人列有韦青松的专利记录。公开号、申请日与权利人依据 Google Patents 索引记录。',
+  'patents.statsTotal': '条专利记录',
+  'patents.statsYears': '年跨度',
+  'patents.statsAssignees': '个权利人',
+  'patents.sourceNote':
+    '来源：Google Patents 中以发明人韦青松索引的记录。有英文记录的标题优先使用英文；此处不作法律状态判断。',
+  'patents.updated': '最后更新于 2026 年 10 月',
+  'patents.records': '条',
+  'patents.filed': '申请日',
+  'patents.google': '在 Google Patents 打开',
+  'patents.viewAll': '全部专利',
+  'patents.selected': '代表性专利',
 
   'projects.github': '更多 GitHub 项目',
   'projects.view': '查看项目',
@@ -233,6 +270,9 @@ const zh: Record<keyof typeof en, string> = {
   'meta.publicationsTitle': '论文',
   'meta.publicationsDescription':
     'Qingsong Wei 关于三维机织物复合材料、弹道冲击与纺织建模的同行评审论文。',
+  'meta.patentsTitle': '专利',
+  'meta.patentsDescription':
+    '发明人列有 Qingsong Wei 的专利记录，涵盖防护纺织品、弹道复合材料与测试方法。',
   'meta.notFoundTitle': '页面未找到',
 };
 
