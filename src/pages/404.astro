@@ -1,10 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { getLangFromUrl, homePath, insightsPath } from '../i18n/utils';
+import { homePath, insightsPath } from '../i18n/utils';
 import { t } from '../i18n/ui';
 import Icon from '../components/Icon.astro';
 
-const lang = getLangFromUrl(Astro.url);
+const lang = 'en' as const;
 const home = homePath(lang);
 const notes = insightsPath(lang);
 ---

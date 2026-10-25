@@ -7,7 +7,6 @@ import '../styles/global.css';
 
 import type { Lang } from '../data/site';
 import { site } from '../data/site';
-import { getLangFromUrl, localizePath } from '../i18n/utils';
 import { t } from '../i18n/ui';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
@@ -25,7 +24,7 @@ interface Props {
 const {
   title,
   description,
-  lang = getLangFromUrl(Astro.url),
+  lang = 'en',
   image = '/og.png',
   type = 'website',
   noindex = false,
@@ -34,23 +33,17 @@ const {
 
 const base = Astro.site ?? new URL(site.url);
 const canonical = new URL(Astro.url.pathname, base);
-const enPath = localizePath(Astro.url.pathname, 'en');
-const zhPath = localizePath(Astro.url.pathname, 'zh');
-const enUrl = new URL(enPath, base);
-const zhUrl = new URL(zhPath, base);
 const ogImage = new URL(image, base);
 const pageTitle = title ? `${title} — ${site.name}` : t(lang, 'site.title');
 const pageDescription = description ?? t(lang, 'site.description');
-const locale = lang === 'zh' ? 'zh_CN' : 'en_US';
-const alternateLocale = lang === 'zh' ? 'en_US' : 'zh_CN';
-const rssHref = lang === 'zh' ? '/zh/rss.xml' : '/rss.xml';
+const rssHref = '/rss.xml';
 
 const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   name: t(lang, 'site.title'),
   url: base.toString(),
-  inLanguage: lang === 'zh' ? 'zh-Hans' : 'en',
+  inLanguage: 'en',
 };
 
 const structuredData = noindex
@@ -61,7 +54,7 @@ const structuredData = noindex
 ---
 
 <!doctype html>
-<html lang={lang === 'zh' ? 'zh-Hans' : 'en'} dir="ltr">
+<html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -73,9 +66,6 @@ const structuredData = noindex
     <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
 
     <link rel="canonical" href={canonical} />
-    <link rel="alternate" hreflang="en" href={enUrl} />
-    <link rel="alternate" hreflang="zh-Hans" href={zhUrl} />
-    <link rel="alternate" hreflang="x-default" href={enUrl} />
     <link rel="alternate" type="application/rss+xml" title={`${site.name} — RSS`} href={rssHref} />
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -91,8 +81,7 @@ const structuredData = noindex
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content={`${site.name} — ${site.tagline[lang]}`} />
-    <meta property="og:locale" content={locale} />
-    <meta property="og:locale:alternate" content={alternateLocale} />
+    <meta property="og:locale" content="en_US" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
@@ -109,6 +98,6 @@ const structuredData = noindex
     <main id="main" tabindex="-1">
       <slot />
     </main>
-    <Footer lang={lang} pathname={Astro.url.pathname} />
+    <Footer lang={lang} />
   </body>
 </html>

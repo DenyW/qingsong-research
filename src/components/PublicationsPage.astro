@@ -16,7 +16,7 @@ interface Props {
 
 const { lang } = Astro.props;
 const base = Astro.site ?? new URL(site.url);
-const pageUrl = new URL(lang === 'zh' ? '/zh/publications/' : '/publications/', base);
+const pageUrl = new URL('/publications/', base);
 const total = publications.length;
 const firstAuthorCount = publications.filter(
   (publication) => publication.authors[0] === site.name,
@@ -30,7 +30,7 @@ const schema = {
   name: t(lang, 'publications.pageTitle'),
   description: t(lang, 'publications.pageLede'),
   url: pageUrl.toString(),
-  inLanguage: lang === 'zh' ? 'zh-Hans' : 'en',
+  inLanguage: 'en',
   mainEntity: {
     '@type': 'ItemList',
     numberOfItems: total,

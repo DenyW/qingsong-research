@@ -4,7 +4,6 @@ import { site } from '../data/site';
 import { homePath, insightsPath, publicationsPath } from '../i18n/utils';
 import { t, type UIKey } from '../i18n/ui';
 import Icon from './Icon.astro';
-import LanguageToggle from './LanguageToggle.astro';
 
 interface Props {
   lang: Lang;
@@ -22,6 +21,7 @@ const nav: Array<{ key: UIKey; href: string; current?: boolean }> = [
   { key: 'nav.projects', href: `${home}#projects` },
   { key: 'nav.insights', href: notes, current: pathname.includes('/insights') },
   { key: 'nav.experience', href: `${home}#experience` },
+  { key: 'nav.funding', href: `${home}#funding` },
 ];
 ---
 
@@ -48,7 +48,6 @@ const nav: Array<{ key: UIKey; href: string; current?: boolean }> = [
     </nav>
 
     <div class="header-actions">
-      <LanguageToggle lang={lang} pathname={pathname} />
       <a class="button button-small header-contact" href={`${home}#contact`}>
         {t(lang, 'nav.contact')}
         <Icon name="arrow-up-right" size={14} />
@@ -74,8 +73,7 @@ const nav: Array<{ key: UIKey; href: string; current?: boolean }> = [
             </a>
           </nav>
           <div class="mobile-panel-footer">
-            <LanguageToggle lang={lang} pathname={pathname} />
-            <span class="mono">EN / 中文</span>
+            <span class="mono">Research, in the open.</span>
           </div>
         </div>
       </details>

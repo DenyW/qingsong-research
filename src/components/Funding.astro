@@ -1,0 +1,92 @@
+---
+import type { Lang } from '../data/site';
+import { site } from '../data/site';
+import { t } from '../i18n/ui';
+import SectionHead from './SectionHead.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+<section id="funding" class="section section--funding">
+  <div class="container">
+    <SectionHead
+      index="06"
+      kicker={t(lang, 'section.funding')}
+      title={t(lang, 'section.fundingTitle')}
+      lede={t(lang, 'section.fundingLede')}
+    />
+
+    <div class="funding-layout">
+      <div class="funding-column">
+        <div class="funding-column-head">
+          <h3 class="mono">{t(lang, 'funding.research')}</h3>
+          <span class="mono funding-count">{site.funding.length}</span>
+        </div>
+
+        <ol class="funding-list">
+          {site.funding.map((item) => (
+            <li class="funding-item">
+              <div class="funding-meta">
+                <span class="mono">{item.period}</span>
+                <span class:list={['funding-role', 'mono', { 'is-pi': item.role === 'PI' }]}>
+                  {item.role === 'PI' ? t(lang, 'funding.pi') : t(lang, 'funding.coi')}
+                </span>
+              </div>
+              <h4>{item.title}</h4>
+              <p class="funding-funder">
+                <span>{item.funder}</span>
+                <span aria-hidden="true">·</span>
+                <span>{item.amount}</span>
+              </p>
+              {item.reference && <p class="funding-ref mono">{item.reference}</p>}
+            </li>
+          ))}
+        </ol>
+      </div>
+
+      <div class="funding-column">
+        <div class="funding-column-head">
+          <h3 class="mono">{t(lang, 'funding.patents')}</h3>
+          <span class="mono funding-count">{site.patents.length}</span>
+        </div>
+
+        <ol class="patent-list">
+          {site.patents.map((patent, index) => (
+            <li class="patent-item">
+              <span class="mono patent-index">{String(index + 1).padStart(2, '0')}</span>
+              <div>
+                <h4>{patent.title}</h4>
+                <p class="mono patent-number">{patent.number}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+
+        <div class="funding-column-head funding-column-head--methods">
+          <h3 class="mono">{t(lang, 'funding.methods')}</h3>
+        </div>
+
+        <dl class="skill-list">
+          {site.skills.map((group) => (
+            <div class="skill-row">
+              <dt class="mono">{group.label}</dt>
+              <dd>
+                <ul class="tag-list">
+                  {group.items.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              </dd>
+            </div>
+          ))}
+        </dl>
+
+        <p class="funding-source mono">{t(lang, 'funding.source')}</p>
+      </div>
+    </div>
+  </div>
+</section>

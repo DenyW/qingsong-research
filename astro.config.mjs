@@ -1,7 +1,7 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
-const site = process.env.SITE_URL ?? 'https://qingsong-research.example.workers.dev';
+const site = process.env.SITE_URL ?? 'https://qingsong-research.drwell86.workers.dev';
 
 export default defineConfig({
   site,
@@ -12,23 +12,5 @@ export default defineConfig({
   build: {
     format: 'directory',
   },
-  i18n: {
-    defaultLocale: 'en',
-    locales: ['en', 'zh'],
-    routing: {
-      prefixDefaultLocale: false,
-      redirectToDefaultLocale: false,
-    },
-  },
-  integrations: [
-    sitemap({
-      i18n: {
-        defaultLocale: 'en',
-        locales: {
-          en: 'en',
-          zh: 'zh-CN',
-        },
-      },
-    }),
-  ],
+  integrations: [sitemap()],
 });

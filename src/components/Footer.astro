@@ -4,19 +4,17 @@ import { site } from '../data/site';
 import { homePath, insightsPath, publicationsPath } from '../i18n/utils';
 import { t } from '../i18n/ui';
 import Icon from './Icon.astro';
-import LanguageToggle from './LanguageToggle.astro';
 
 interface Props {
   lang: Lang;
-  pathname: string;
 }
 
-const { lang, pathname } = Astro.props;
+const { lang } = Astro.props;
 const home = homePath(lang);
 const notes = insightsPath(lang);
 const papers = publicationsPath(lang);
 const year = new Date().getFullYear();
-const rssHref = lang === 'zh' ? '/zh/rss.xml' : '/rss.xml';
+const rssHref = '/rss.xml';
 
 const nav = [
   { label: t(lang, 'nav.research'), href: `${home}#research` },
@@ -24,6 +22,7 @@ const nav = [
   { label: t(lang, 'nav.projects'), href: `${home}#projects` },
   { label: t(lang, 'nav.insights'), href: notes },
   { label: t(lang, 'nav.experience'), href: `${home}#experience` },
+  { label: t(lang, 'nav.funding'), href: `${home}#funding` },
   { label: t(lang, 'nav.contact'), href: `${home}#contact` },
 ];
 ---
@@ -77,7 +76,6 @@ const nav = [
         <span>{t(lang, 'footer.license')}</span>
       </p>
       <div class="footer-bottom-actions">
-        <LanguageToggle lang={lang} pathname={pathname} />
         <a class="back-to-top" href="#main">
           {t(lang, 'footer.top')}
           <Icon name="arrow-down" size={13} class="back-to-top-icon" />

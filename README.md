@@ -1,39 +1,42 @@
 # Qingsong Wei — Research, in the open
 
-A bilingual personal research website for **Qingsong Wei**, built with
+The personal research website of **Qingsong Wei**, built with
 [Astro](https://astro.build) and deployed as static assets on
 [Cloudflare Workers](https://workers.cloudflare.com).
 
-- English is the default language at `/`.
-- Chinese is available at `/zh/`.
-- The language switch preserves the current page.
+- Live site: <https://qingsong-research.drwell86.workers.dev>
+- GitHub: <https://github.com/DenyW/qingsong-research>
+- Language: English
 
 ## What is included
 
 - **Homepage** — portrait placeholder, research directions, selected
-  publications, open-source projects, field notes, experience, and contact.
+  publications, open-source projects, field notes, experience, research funding,
+  patents, methods, and contact.
 - **Publications** — all 27 peer-reviewed journal articles, grouped by year,
   with DOI links and the author's name highlighted. Available at
-  `/publications/` and `/zh/publications/`.
-- **Field notes** — three bilingual essays with RSS feeds at `/rss.xml` and
-  `/zh/rss.xml`.
-- **SEO** — sitemap, canonical URLs, `hreflang` alternates, Open Graph metadata,
-  and JSON-LD for the person, collection pages, and articles.
+  `/publications/`.
+- **Field notes** — three essays with an RSS feed at `/rss.xml`.
+- **SEO** — sitemap, canonical URLs, Open Graph metadata, and JSON-LD for the
+  person, collection pages, and articles.
 - **Privacy** — no analytics, no cookies, no third-party font or script
   requests.
 
 ## Content sources
 
-The site only publishes information that can be checked against a public
-record. The main sources are:
+The site only publishes information that can be checked against a public record
+or a document supplied by Qingsong Wei.
 
 - [ORCID record 0000-0001-6164-350X](https://orcid.org/0000-0001-6164-350X)
 - [ResearchGate profile](https://www.researchgate.net/profile/Qingsong-Wei-3)
 - [Crossref](https://www.crossref.org/) metadata for publication details
+- Curriculum vitae, August 2026, for the current appointment, education,
+  research funding, patents, technical skills, and service roles
 - Public GitHub repositories for the projects section
 
 Publication titles, author order, journal names, volumes, and DOIs follow the
-Crossref record. Employment and education entries follow the ORCID record.
+Crossref record. Employment, education, funding, and patent details follow the
+CV and ORCID record.
 
 ## Local development
 
@@ -66,8 +69,8 @@ The repository is configured for Cloudflare Workers static assets through
 4. Set the `SITE_URL` environment variable to the production URL so canonical
    links, the sitemap, and `robots.txt` use the correct domain.
 
-`SITE_URL` is read in `astro.config.mjs`. The fallback value is a placeholder
-and should not be used in production.
+`SITE_URL` is read in `astro.config.mjs`. The fallback is the current
+`workers.dev` URL, so a normal build works without extra configuration.
 
 Manual deployment from a local checkout:
 
@@ -82,22 +85,22 @@ npx wrangler deploy
 src/
   components/      UI sections and page-level components
   data/            site content, publications, and field notes
-  i18n/            bilingual UI strings and routing helpers
+  i18n/            UI strings and route helpers
   layouts/         shared HTML shell, SEO, and JSON-LD
-  pages/           English and Chinese routes
+  pages/           English routes
   styles/          design system and responsive rules
-public/            static assets, headers, robots.txt, manifest
+public/            static assets, headers, manifest
 ```
 
-## Placeholders
+## Placeholders and privacy
 
 - **Portrait** — `public/images/portrait-placeholder.svg` is an abstract
   placeholder. Replace it with an authorized 4:5 photograph and update the
   `portrait` entry in `src/data/site.ts`.
-- **Chinese name** — the Chinese pages use the Latin name because a Chinese
-  character form has not been verified. Add it only after confirmation.
-- **Project status** — the `qingsong-research` project is listed as open source
-  once this repository is public.
+- **Phone number** — the CV includes a phone number, but it is intentionally not
+  published. Use the institutional email address for contact.
+- **Chinese name** — the site is English-only. A Chinese character form has not
+  been added.
 
 ## License
 

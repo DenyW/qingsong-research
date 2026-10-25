@@ -19,11 +19,8 @@ const en = {
   'nav.projects': 'Projects',
   'nav.insights': 'Field notes',
   'nav.experience': 'Experience',
+  'nav.funding': 'Funding',
   'nav.contact': 'Contact',
-
-  'lang.switch': 'Switch to Chinese',
-  'lang.en': 'English',
-  'lang.zh': 'Chinese',
 
   'hero.eyebrow': 'Personal research site · 2026',
   'hero.status': 'Open to collaboration',
@@ -41,7 +38,11 @@ const en = {
   'section.insights': 'Field notes',
   'section.insightsTitle': 'Notes in progress',
   'section.experience': 'Experience',
-  'section.experienceTitle': 'Appointments, visits, and training',
+  'section.experienceTitle': 'Appointments, education, and service',
+  'section.funding': 'Funding & patents',
+  'section.fundingTitle': 'Work behind the papers',
+  'section.fundingLede':
+    'Research funding, patents, and the methods that support the modelling and experiments. Details follow the CV updated in August 2026.',
   'section.contact': 'Contact',
 
   'publications.verified': 'Verified against ORCID & Crossref',
@@ -66,6 +67,13 @@ const en = {
   'publications.venue': 'Venue',
   'publications.read': 'Read paper',
 
+  'funding.research': 'Research funding',
+  'funding.patents': 'Patents',
+  'funding.methods': 'Methods & tools',
+  'funding.pi': 'PI',
+  'funding.coi': 'Co-I',
+  'funding.source': 'Source: CV, August 2026.',
+
   'projects.github': 'More on GitHub',
   'projects.view': 'View project',
   'projects.status': 'Status',
@@ -79,7 +87,7 @@ const en = {
   'insights.prev': 'Previous note',
   'insights.pageTitle': 'Field notes',
   'insights.pageLede':
-    'Short essays on open research, bilingual writing, and the small tools that make methods visible.',
+    'Short essays on open research, clear writing, and the small tools that make methods visible.',
   'insights.rss': 'RSS feed',
   'insights.empty': 'No notes yet.',
 
@@ -103,7 +111,7 @@ const en = {
 
   'meta.insightsTitle': 'Field notes',
   'meta.insightsDescription':
-    'Short essays by Qingsong Wei on open research, bilingual writing, and small tools.',
+    'Short essays by Qingsong Wei on open research, clear writing, and small tools.',
   'meta.publicationsTitle': 'Publications',
   'meta.publicationsDescription':
     'Peer-reviewed publications by Qingsong Wei on 3D woven fabric composites, ballistic impact, and textile modelling.',
@@ -129,11 +137,8 @@ const zh: Record<keyof typeof en, string> = {
   'nav.projects': '项目',
   'nav.insights': '笔记',
   'nav.experience': '经历',
+  'nav.funding': '经费',
   'nav.contact': '联系',
-
-  'lang.switch': '切换到英文',
-  'lang.en': '英文',
-  'lang.zh': '中文',
 
   'hero.eyebrow': '个人科研网站 · 2026',
   'hero.status': '开放协作',
@@ -151,7 +156,11 @@ const zh: Record<keyof typeof en, string> = {
   'section.insights': '现场笔记',
   'section.insightsTitle': '进行中的笔记',
   'section.experience': '经历',
-  'section.experienceTitle': '任职、访问与教育',
+  'section.experienceTitle': '任职、教育与服务',
+  'section.funding': '经费与专利',
+  'section.fundingTitle': '论文背后的工作',
+  'section.fundingLede':
+    '研究经费、专利，以及支撑建模与实验的方法。信息依据 2026 年 8 月更新的简历。',
   'section.contact': '联系',
 
   'publications.verified': '经 ORCID 与 Crossref 核验',
@@ -176,6 +185,13 @@ const zh: Record<keyof typeof en, string> = {
   'publications.venue': '发表处',
   'publications.read': '阅读论文',
 
+  'funding.research': '研究经费',
+  'funding.patents': '专利',
+  'funding.methods': '方法与工具',
+  'funding.pi': '主持',
+  'funding.coi': '参与',
+  'funding.source': '来源：2026 年 8 月简历。',
+
   'projects.github': '更多 GitHub 项目',
   'projects.view': '查看项目',
   'projects.status': '状态',
@@ -189,7 +205,7 @@ const zh: Record<keyof typeof en, string> = {
   'insights.prev': '上一篇',
   'insights.pageTitle': '现场笔记',
   'insights.pageLede':
-    '关于开放研究、双语写作，以及那些让方法变得可见的小工具的短札。',
+    '关于开放研究、清晰写作，以及那些让方法变得可见的小工具的短札。',
   'insights.rss': 'RSS 订阅',
   'insights.empty': '还没有笔记。',
 
@@ -212,7 +228,7 @@ const zh: Record<keyof typeof en, string> = {
 
   'meta.insightsTitle': '现场笔记',
   'meta.insightsDescription':
-    'Qingsong Wei 关于开放研究、双语写作与小工具的短札。',
+    'Qingsong Wei 关于开放研究、清晰写作与小工具的短札。',
   'meta.publicationsTitle': '论文',
   'meta.publicationsDescription':
     'Qingsong Wei 关于三维机织物复合材料、弹道冲击与纺织建模的同行评审论文。',

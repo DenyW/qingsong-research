@@ -7,7 +7,7 @@ import { insightPath } from '../i18n/utils';
 export function GET(context: APIContext) {
   return rss({
     title: `${site.name} — Field notes`,
-    description: 'Short essays on open research, bilingual writing, and small tools.',
+    description: 'Short essays on open research, clear writing, and small tools.',
     site: context.site ?? new URL(site.url),
     items: insightsByDate.map((post) => ({
       title: post.title.en,

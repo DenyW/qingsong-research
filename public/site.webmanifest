@@ -1,7 +1,7 @@
 {
-  "name": "Qingsong — Research, in the open",
-  "short_name": "Qingsong",
-  "description": "The bilingual research website of Qingsong Wei.",
+  "name": "Qingsong Wei — Research, in the open",
+  "short_name": "Qingsong Wei",
+  "description": "The research website of Qingsong Wei.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#f4f1e8",

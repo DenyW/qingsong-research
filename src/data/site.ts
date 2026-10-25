@@ -38,6 +38,25 @@ export interface ExperienceItem {
   kind: Localized;
 }
 
+export interface FundingItem {
+  period: string;
+  title: string;
+  funder: string;
+  amount: string;
+  role: string;
+  reference?: string;
+}
+
+export interface PatentItem {
+  title: string;
+  number: string;
+}
+
+export interface SkillGroup {
+  label: string;
+  items: string[];
+}
+
 const location: Localized = {
   en: 'Singapore · Hangzhou',
   zh: '新加坡 · 杭州',
@@ -53,20 +72,20 @@ export const site = {
   givenName: 'Qingsong',
   familyName: 'Wei',
   initials: 'Q',
-  url: 'https://qingsong-research.example.workers.dev',
+  url: 'https://qingsong-research.drwell86.workers.dev',
   email: 'wqs@zstu.edu.cn',
   location,
   role: {
-    en: 'Researcher in textile composites & impact mechanics',
-    zh: '纺织复合材料与冲击力学研究者',
+    en: 'Lecturer (Assistant Professor) · Textile composites & impact mechanics',
+    zh: '讲师（助理教授）· 纺织复合材料与冲击力学',
   },
   tagline: {
     en: 'Research, in the open.',
     zh: '研究，在开放中发生。',
   },
   intro: {
-    en: "I'm Qingsong Wei, a researcher working on how three-dimensional woven fabrics and textile composites respond to ballistic impact. My work combines finite element modelling, experiments, and architecture-level design. This site collects the work as it becomes public.",
-    zh: '我是 Qingsong Wei，研究三维机织物与纺织复合材料在弹道冲击下的响应。我的工作结合有限元建模、实验与织物结构层面的设计。这个网站收集那些正在公开的工作。',
+    en: "I'm Qingsong Wei, a Lecturer (Assistant Professor) working on how three-dimensional woven fabrics and textile composites respond to ballistic impact. My work combines meso-scale finite element modelling, gas-gun experiments, and architecture-level design. This site collects the work as it becomes public.",
+    zh: '我是 Qingsong Wei，讲师（助理教授），研究三维机织物与纺织复合材料在弹道冲击下的响应。我的工作结合细观有限元建模、气炮实验与织物结构层面的设计。这个网站收集那些正在公开的工作。',
   },
   portrait: {
     src: '/images/portrait-placeholder.svg',
@@ -121,8 +140,8 @@ export const site = {
   ] satisfies NowItem[],
   research: {
     intro: {
-      en: 'My work follows one question through several scales: how does fabric architecture shape the way a textile composite absorbs and distributes impact energy? The three directions below are the lines I keep returning to.',
-      zh: '我的工作围绕一个问题在多个尺度上展开：织物结构如何塑造纺织复合材料吸收与分散冲击能量的方式？下面三条，是我持续回到的线索。',
+      en: 'My work follows one question through several scales: how does fabric architecture shape the way a textile composite absorbs and distributes impact energy? I combine meso-scale finite element modelling (ABAQUS/LS-DYNA), gas-gun experiments, digital image correlation, and physics-informed surrogates to connect yarn-level damage with structural response.',
+      zh: '我的工作围绕一个问题在多个尺度上展开：织物结构如何塑造纺织复合材料吸收与分散冲击能量的方式？我结合细观有限元建模（ABAQUS/LS-DYNA）、气炮实验、数字图像相关与物理信息代理模型，把纱线尺度损伤与结构响应连接起来。',
     },
     directions: [
       {
@@ -132,12 +151,12 @@ export const site = {
           zh: '三维机织物的弹道冲击',
         },
         description: {
-          en: 'Penetration, deformation, and energy absorption in three-dimensional woven fabrics — how projectile geometry, clamping, impact angle, and strain rate change the failure mechanism.',
-          zh: '三维机织物中的侵彻、变形与能量吸收——弹体几何、夹持方式、冲击角度与应变率如何改变失效机制。',
+          en: 'Penetration, deformation, and energy absorption in three-dimensional woven fabrics — how projectile geometry, clamping, impact angle, and strain rate change the failure mechanism. Experimental work uses gas-gun impact testing and digital image correlation.',
+          zh: '三维机织物中的侵彻、变形与能量吸收——弹体几何、夹持方式、冲击角度与应变率如何改变失效机制。实验工作采用气炮冲击测试与数字图像相关。',
         },
         tags: {
-          en: ['Ballistic penetration', '3D fabric', 'Damage'],
-          zh: ['弹道侵彻', '三维织物', '损伤'],
+          en: ['Ballistic penetration', '3D fabric', 'DIC'],
+          zh: ['弹道侵彻', '三维织物', '数字图像相关'],
         },
       },
       {
@@ -147,12 +166,12 @@ export const site = {
           zh: '纺织复合材料的多尺度建模',
         },
         description: {
-          en: 'Finite element models that connect fibre bundles, yarns, fabric architecture, and structural response, with high-strain-rate material behaviour made explicit.',
-          zh: '连接纤维束、纱线、织物结构与整体响应的有限元模型，并显式处理高应变率下的材料行为。',
+          en: 'Meso-scale finite element models that connect fibre bundles, yarns, fabric architecture, and structural response, with high-strain-rate behaviour and progressive damage made explicit. Recent work extends these models with physics-informed neural networks and Gaussian-process surrogates.',
+          zh: '连接纤维束、纱线、织物结构与整体响应的细观有限元模型，并显式处理高应变率行为与渐进损伤。近期工作将这些模型与物理信息神经网络、高斯过程代理模型结合。',
         },
         tags: {
-          en: ['Finite element analysis', 'Multi-scale', 'Strain rate'],
-          zh: ['有限元分析', '多尺度', '应变率'],
+          en: ['ABAQUS', 'LS-DYNA', 'Multi-scale', 'PINN'],
+          zh: ['ABAQUS', 'LS-DYNA', '多尺度', '物理信息神经网络'],
         },
       },
       {
@@ -162,12 +181,12 @@ export const site = {
           zh: '结构与性能设计',
         },
         description: {
-          en: 'Comparative studies of angle-interlock, orthogonal, layer-to-layer, and hybrid architectures — using fabric structure as a design variable for protective composites.',
-          zh: '对角联锁、正交、层间与混杂结构进行比较研究——把织物结构作为防护复合材料的设计变量。',
+          en: 'Comparative studies of angle-interlock, orthogonal, layer-to-layer, and hybrid architectures — using fabric structure as a design variable for protective composites in Kevlar, CFRP, and GFRP systems.',
+          zh: '对角联锁、正交、层间与混杂结构进行比较研究——把织物结构作为 Kevlar、CFRP 与 GFRP 防护复合材料的设计变量。',
         },
         tags: {
-          en: ['Fabric architecture', 'Composites', 'Design'],
-          zh: ['织物结构', '复合材料', '设计'],
+          en: ['Fabric architecture', 'Composites', 'Energy absorption'],
+          zh: ['织物结构', '复合材料', '能量吸收'],
         },
       },
     ] satisfies ResearchDirection[],
@@ -199,25 +218,25 @@ export const site = {
       name: 'qingsong-research',
       year: '2026',
       description: {
-        en: 'This site: a bilingual, open-source research website built with Astro and deployed as static assets on Cloudflare Workers.',
-        zh: '这个网站本身：用 Astro 构建、以静态资源部署在 Cloudflare Workers 上的双语开源科研网站。',
+        en: 'This site: an open-source research website built with Astro and deployed as static assets on Cloudflare Workers.',
+        zh: '这个网站本身：用 Astro 构建、以静态资源部署在 Cloudflare Workers 上的开源科研网站。',
       },
-      tags: ['Astro', 'Cloudflare', 'Bilingual'],
+      tags: ['Astro', 'Cloudflare', 'Static site'],
       href: 'https://github.com/DenyW/qingsong-research',
       status: { en: 'Open source', zh: '开源' },
     },
   ] satisfies Project[],
   experience: [
     {
-      period: { en: 'Present', zh: '至今' },
-      role: { en: 'Researcher', zh: '研究者' },
+      period: { en: '2021 — Present', zh: '2021 — 至今' },
+      role: { en: 'Lecturer (Assistant Professor)', zh: '讲师（助理教授）' },
       organization: {
-        en: 'Zhejiang Sci-Tech University · College of Textile Science and Engineering',
+        en: 'Zhejiang Sci-Tech University · School of Textile Science and Engineering',
         zh: '浙江理工大学 · 纺织科学与工程学院',
       },
       summary: {
-        en: 'Current appointment in the College of Textile Science and Engineering, Hangzhou.',
-        zh: '现任教于纺织科学与工程学院，杭州。',
+        en: 'Lecturer in the School of Textile Science and Engineering, Hangzhou. Research on 3D woven textile composites, ballistic impact, and meso-scale finite element modelling.',
+        zh: '任教于纺织科学与工程学院，杭州。研究三维机织纺织复合材料、弹道冲击与细观有限元建模。',
       },
       kind: { en: 'Appointment', zh: '任职' },
     },
@@ -235,28 +254,41 @@ export const site = {
       kind: { en: 'Visiting', zh: '访问' },
     },
     {
-      period: { en: '2024.04 — 2026.04', zh: '2024.04 — 2026.04' },
+      period: { en: '2024.05 — 2026.05', zh: '2024.05 — 2026.05' },
       role: { en: 'Postdoctoral Researcher', zh: '博士后研究员' },
       organization: {
-        en: 'Fujian Normal University · College of Chemistry and Materials',
-        zh: '福建师范大学 · 化学与材料学院',
+        en: 'Fujian Normal University · School of Chemistry and Materials Science',
+        zh: '福建师范大学 · 化学与材料科学学院',
       },
       summary: {
-        en: 'Postdoctoral research in the College of Chemistry and Materials, Fuzhou.',
-        zh: '在化学与材料学院从事博士后研究，福州。',
+        en: 'Postdoctoral research in the School of Chemistry and Materials Science, Fuzhou.',
+        zh: '在化学与材料科学学院从事博士后研究，福州。',
       },
       kind: { en: 'Research', zh: '研究' },
     },
     {
-      period: { en: '2018.03 — 2021.12', zh: '2018.03 — 2021.12' },
-      role: { en: 'PhD', zh: '博士' },
+      period: { en: '2016 — 2021', zh: '2016 — 2021' },
+      role: { en: 'PhD in Textile Science and Engineering', zh: '纺织科学与工程博士' },
       organization: {
         en: 'Donghua University · College of Textiles',
         zh: '东华大学 · 纺织学院',
       },
       summary: {
-        en: 'Doctoral research in the College of Textiles, Shanghai.',
-        zh: '在纺织学院攻读博士，上海。',
+        en: 'Doctoral research on the ballistic impact mechanics of 3D woven textile composites. Supervisors: Prof. Gu Bohong and Prof. Sun Baozhong.',
+        zh: '研究三维机织纺织复合材料的弹道冲击力学。导师：顾伯洪教授、孙宝忠教授。',
+      },
+      kind: { en: 'Education', zh: '教育' },
+    },
+    {
+      period: { en: '2010 — 2014', zh: '2010 — 2014' },
+      role: { en: 'B.Eng. in Textile Engineering', zh: '纺织工程学士' },
+      organization: {
+        en: 'Nantong University · Jiangsu',
+        zh: '南通大学 · 江苏',
+      },
+      summary: {
+        en: 'Undergraduate training in textile engineering.',
+        zh: '纺织工程本科训练。',
       },
       kind: { en: 'Education', zh: '教育' },
     },
@@ -270,7 +302,119 @@ export const site = {
       },
       kind: { en: 'Service', zh: '服务' },
     },
+    {
+      period: { en: 'Present', zh: '至今' },
+      role: { en: 'Young Editorial Board Member', zh: '青年编委' },
+      organization: { en: 'Cotton Textile Technology', zh: '棉纺织技术' },
+      summary: {
+        en: 'Young editorial board member for the journal Cotton Textile Technology.',
+        zh: '担任《棉纺织技术》青年编委。',
+      },
+      kind: { en: 'Service', zh: '服务' },
+    },
+    {
+      period: { en: 'Present', zh: '至今' },
+      role: { en: 'Committee Member', zh: '委员' },
+      organization: {
+        en: 'Textile-Structured Composites Committee · Chinese Society for Composite Materials',
+        zh: '纺织结构复合材料专业委员会 · 中国复合材料学会',
+      },
+      summary: {
+        en: 'Member of the Textile-Structured Composites Committee.',
+        zh: '中国复合材料学会纺织结构复合材料专业委员会委员。',
+      },
+      kind: { en: 'Service', zh: '服务' },
+    },
   ] satisfies ExperienceItem[],
+  funding: [
+    {
+      period: '2025 — 2027',
+      title: 'Adaptive Protection and Impact Mechanism of Functionally Zoned 3D Fabrics',
+      funder: 'Zhejiang Department of Education',
+      amount: 'RMB 20,000',
+      role: 'PI',
+    },
+    {
+      period: '2023 — 2025',
+      title: 'Ballistic Mechanical Behavior and Structural Optimisation of 3D Angle Interlock Fabrics',
+      funder: 'Zhejiang Natural Science Foundation (ZJNSF)',
+      amount: 'RMB 100,000',
+      role: 'PI',
+      reference: 'LQ23A020008',
+    },
+    {
+      period: '2021 — 2024',
+      title: 'Ballistic Penetration Mechanism and Mesoscopic Damage of 3D Angle Interlock Fabrics',
+      funder: 'Zhejiang Sci-Tech University',
+      amount: 'RMB 120,000',
+      role: 'PI',
+      reference: '22202007-Y',
+    },
+    {
+      period: '2020 — 2022',
+      title: 'Temperature Aging and Ballistic Impact Coupling Effects on Non-woven Fabrics',
+      funder: 'Donghua University',
+      amount: 'RMB 20,000',
+      role: 'PI',
+      reference: 'CUSF-DH-D-2021013',
+    },
+    {
+      period: '2024 — 2026',
+      title: 'Self-healing Flexible Perovskite Composite Nanofiber Membranes',
+      funder: 'Zhejiang Natural Science Foundation (ZJNSF)',
+      amount: 'RMB 100,000',
+      role: 'Co-Investigator',
+      reference: 'LY24E030004',
+    },
+    {
+      period: '2018 — 2021',
+      title: 'Multi-scale Thermal Oxidative Aging of Braided Composites',
+      funder: 'National Natural Science Foundation of China (NSFC)',
+      amount: 'RMB 500,000',
+      role: 'Co-Investigator',
+      reference: '51875099',
+    },
+  ] satisfies FundingItem[],
+  patents: [
+    {
+      title: 'Wraparound Bulletproof and Stab-Resistant Backpack',
+      number: 'CN 201920255550.6',
+    },
+    {
+      title: 'Production Process of Seamless Integrated Bulletproof Helmet',
+      number: 'CN 119753913A',
+    },
+    {
+      title: 'Experimental Testing Method and Device for Fabric Impact Resistance',
+      number: 'CN 120142045A',
+    },
+    {
+      title: 'Three-Directional Braided Bulletproof Structure',
+      number: 'CN 119374415A',
+    },
+  ] satisfies PatentItem[],
+  skills: [
+    {
+      label: 'FEA & simulation',
+      items: ['ABAQUS (VUMAT/VUSDFLD)', 'LS-DYNA', 'ANSYS', 'TexGen', 'WiseTex'],
+    },
+    {
+      label: 'Programming',
+      items: ['Python', 'MATLAB', 'Fortran user subroutines'],
+    },
+    {
+      label: 'Experimental',
+      items: ['Gas-gun ballistic testing (50–900 m/s)', 'Drop-weight impact', 'DIC', 'SEM'],
+    },
+    {
+      label: 'Machine learning',
+      items: [
+        'Physics-informed neural networks',
+        'Surrogate modelling',
+        'Gaussian process regression',
+      ],
+    },
+  ] satisfies SkillGroup[],
   contact: {
     title: {
       en: "Let's make ideas legible.",

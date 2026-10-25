@@ -98,45 +98,45 @@ export const insights: Insight[] = [
     ],
   },
   {
-    slug: 'bilingual-is-a-design-constraint',
+    slug: 'writing-for-readers-outside-your-field',
     date: '2026-10-12',
     readingTime: 4,
     tags: {
-      en: ['Bilingual', 'Design', 'Communication'],
-      zh: ['双语', '设计', '沟通'],
+      en: ['Writing', 'Clarity', 'Communication'],
+      zh: ['写作', '清晰', '沟通'],
     },
     title: {
-      en: 'Bilingual is a design constraint, not a translation task',
-      zh: '双语是一种设计约束，而非翻译任务',
+      en: 'Writing for readers outside your field',
+      zh: '为领域之外的读者写作',
     },
     excerpt: {
-      en: 'English is the default here, but Chinese is not an afterthought. Designing for two reading cultures changes the structure, not just the words.',
-      zh: '这里默认使用英文，但中文不是事后补上的附件。为两种阅读文化做设计，改变的是结构，而不只是字词。',
+      en: 'A research website is easy to fill. A readable one is harder. Writing for readers who do not share your vocabulary changes the structure, not just the words.',
+      zh: '科研网站很容易填满，但做到可读更难。为不共享同一套词汇的读者写作，改变的是结构，而不只是字词。',
     },
     body: [
       {
         type: 'p',
         text: {
-          en: 'A language toggle is easy to add. A bilingual website is harder. The moment two languages share a layout, assumptions about sentence length, hierarchy, and tone become visible.',
-          zh: '加一个语言切换按钮很容易。做一个真正的双语网站要难得多。当两种语言共用一套版式，关于句子长度、层级和语气的假设就会暴露出来。',
+          en: 'A research website is easy to fill. A readable one is harder. The moment you write for readers who do not share your vocabulary, assumptions about sentence length, hierarchy, and tone become visible.',
+          zh: '科研网站很容易填满，但做到可读更难。当你为不共享同一套词汇的读者写作时，关于句子长度、层级和语气的假设就会暴露出来。',
         },
       },
       {
         type: 'p',
         text: {
-          en: 'English and Chinese do not distribute meaning in the same way. A headline that feels crisp in English can feel breathless in Chinese. A parenthetical aside that works in one language can stop the sentence in the other.',
-          zh: '英文和中文分配意义的方式并不相同。一个在英文里干脆利落的标题，直译成中文可能显得气喘吁吁；一个在英文里自然的括号补充，换到中文里可能让句子停住。',
+          en: 'Specialist writing often hides its own context. A term that is precise inside a subfield can be opaque outside it. The fix is not to simplify the science, but to make the path into it visible.',
+          zh: '专业写作常常隐藏自己的语境。一个在子领域内精确的术语，到了领域之外可能难以理解。解决办法不是简化科学，而是让进入它的路径变得可见。',
         },
       },
       {
         type: 'h2',
-        text: { en: 'Default, not dominance', zh: '默认，不等于主导' },
+        text: { en: 'English as a working language', zh: '英语作为工作语言' },
       },
       {
         type: 'p',
         text: {
-          en: 'English is the default because much of the relevant literature and many potential readers work in English. Default is a routing decision, not a claim about importance. The Chinese version is written as a Chinese text, not a mirror of the English one.',
-          zh: '默认英文，是因为相关文献和潜在读者中有很多使用英文。默认是一种路由选择，不是关于重要性的判断。中文版是作为中文文本书写的，不是英文版的镜像。',
+          en: 'English is the working language here because much of the relevant literature and many potential readers use it. That is a routing decision, not a claim about the value of other languages.',
+          zh: '这里以英语为工作语言，是因为相关文献和潜在读者中有很多使用英语。这是一种路由选择，而不是对其他语言价值的判断。',
         },
       },
       {
@@ -148,27 +148,27 @@ export const insights: Insight[] = [
       },
       {
         type: 'h2',
-        text: { en: 'What the toggle really toggles', zh: '切换按钮真正切换的是什么' },
+        text: { en: 'What a good page really changes', zh: '一个好页面真正改变的是什么' },
       },
       {
         type: 'p',
         text: {
-          en: 'The toggle changes more than words. It changes rhythm, examples, and sometimes the order of an argument. It also changes who the page is addressing. A bilingual site should make both audiences feel addressed, not one audience feel translated.',
-          zh: '它切换的不只是词。它改变节奏、例子，有时也改变论证的顺序。它还改变页面在对谁说话。双语网站应该让两种读者都感到被直接称呼，而不是让其中一种读者读到的像是译文。',
+          en: 'A good research page changes more than words. It changes rhythm, examples, and sometimes the order of an argument. It also changes who the page is addressing.',
+          zh: '一个好的科研页面改变的不只是词。它改变节奏、例子，有时也改变论证的顺序。它还改变页面在对谁说话。',
         },
       },
       {
         type: 'quote',
         text: {
-          en: 'Translation asks: how do I say this in the other language? Bilingual design asks: what does this reader need here?',
-          zh: '翻译问的是：这句话用另一种语言怎么说？双语设计问的是：这里的读者需要什么？',
+          en: 'Translation asks: how do I say this in the other language? Clear writing asks: what does this reader need here?',
+          zh: '翻译问的是：这句话用另一种语言怎么说？清晰写作问的是：这里的读者需要什么？',
         },
       },
       {
         type: 'p',
         text: {
-          en: 'This site will keep changing as the two versions diverge. That is not a failure of consistency. It is the point.',
-          zh: '随着两个版本逐渐分化，这个网站会继续变化。这不是一致性失败，而正是重点。',
+          en: 'This site will keep changing as I learn who is reading. That is not a failure of consistency. It is the point.',
+          zh: '随着我逐渐了解读者是谁，这个网站会继续变化。这不是一致性失败，而正是重点。',
         },
       },
     ],
@@ -218,7 +218,7 @@ export const insights: Insight[] = [
       {
         type: 'p',
         text: {
-          en: 'This is also why the site itself is open source. The design, the bilingual content model, and the deployment are not separate from the argument. They are a demonstration of the kind of infrastructure I want research to have: modest, readable, and easy to fork.',
+          en: 'This is also why the site itself is open source. The design, the content model, and the deployment are not separate from the argument. They are a demonstration of the kind of infrastructure I want research to have: modest, readable, and easy to fork.',
           zh: '这也是网站本身开源的原因。设计、双语内容模型和部署方式，不是论证之外的东西。它们展示了我希望研究拥有怎样的基础设施：克制、可读、容易复制。',
         },
       },

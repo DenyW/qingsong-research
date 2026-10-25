@@ -13,14 +13,14 @@ interface Props {
 
 const { lang } = Astro.props;
 const base = Astro.site ?? new URL(site.url);
-const rssHref = lang === 'zh' ? '/zh/rss.xml' : '/rss.xml';
+const rssHref = '/rss.xml';
 const schema = {
   '@context': 'https://schema.org',
   '@type': 'CollectionPage',
   name: t(lang, 'insights.pageTitle'),
   description: t(lang, 'insights.pageLede'),
-  url: new URL(lang === 'zh' ? '/zh/insights/' : '/insights/', base).toString(),
-  inLanguage: lang === 'zh' ? 'zh-Hans' : 'en',
+  url: new URL('/insights/', base).toString(),
+  inLanguage: 'en',
   hasPart: insightsByDate.map((post) => ({
     '@type': 'BlogPosting',
     headline: post.title[lang],

@@ -414,38 +414,6 @@ main {
   flex-shrink: 0;
 }
 
-.lang-toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 5px 9px;
-  border: 1px solid var(--line-strong);
-  border-radius: 999px;
-  font-family: var(--mono);
-  font-size: 0.58rem;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  line-height: 1;
-  transition: border-color 0.2s ease;
-}
-
-.lang-toggle:hover {
-  border-color: var(--ink);
-}
-
-.lang-option {
-  color: var(--muted);
-  transition: color 0.2s ease;
-}
-
-.lang-option.is-active {
-  color: var(--ink);
-}
-
-.lang-divider {
-  color: var(--line-strong);
-}
-
 .mobile-menu {
   display: none;
   position: relative;
@@ -1431,6 +1399,162 @@ main {
   text-align: right;
 }
 
+/* Funding & patents */
+
+.section--funding {
+  padding-top: clamp(72px, 9vw, 120px);
+}
+
+.funding-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: clamp(32px, 6vw, 96px);
+  padding-top: clamp(28px, 4vw, 48px);
+  border-top: 1px solid var(--line-strong);
+}
+
+.funding-column-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.funding-column-head h3 {
+  color: var(--accent);
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.funding-count {
+  color: var(--muted);
+  font-size: 0.54rem;
+}
+
+.funding-list,
+.patent-list {
+  padding: 0;
+  list-style: none;
+}
+
+.funding-item {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.funding-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--muted);
+  font-size: 0.54rem;
+}
+
+.funding-role {
+  padding: 2px 6px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 0.48rem;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.funding-role.is-pi {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.funding-item h4 {
+  margin-top: 9px;
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.funding-funder {
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+.funding-funder span[aria-hidden] {
+  margin: 0 6px;
+}
+
+.funding-ref {
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 0.54rem;
+}
+
+.patent-item {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr);
+  gap: 10px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.patent-index {
+  padding-top: 4px;
+  color: var(--accent);
+  font-size: 0.54rem;
+}
+
+.patent-item h4 {
+  font-size: 0.92rem;
+  font-weight: 650;
+  line-height: 1.4;
+}
+
+.patent-number {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.54rem;
+}
+
+.funding-column-head--methods {
+  margin-top: 34px;
+}
+
+.skill-list {
+  margin: 0;
+}
+
+.skill-row {
+  padding: 13px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.skill-row dt {
+  color: var(--muted);
+  font-size: 0.52rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.skill-row dd {
+  margin: 8px 0 0;
+}
+
+.skill-row .tag-list {
+  margin-top: 0;
+}
+
+.funding-source {
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 0.5rem;
+}
+
 /* Contact */
 
 .contact {
@@ -1685,22 +1809,6 @@ main {
   display: flex;
   align-items: center;
   gap: 16px;
-}
-
-.site-footer .lang-toggle {
-  border-color: rgba(244, 241, 232, 0.28);
-}
-
-.site-footer .lang-option {
-  color: rgba(244, 241, 232, 0.5);
-}
-
-.site-footer .lang-option.is-active {
-  color: var(--paper);
-}
-
-.site-footer .lang-divider {
-  color: rgba(244, 241, 232, 0.25);
 }
 
 .back-to-top {
@@ -2185,6 +2293,11 @@ main {
   .notes-row {
     grid-template-columns: 40px 120px minmax(0, 1fr) 30px;
     gap: 20px;
+  }
+
+  .funding-layout {
+    grid-template-columns: 1fr;
+    gap: 36px;
   }
 
   .contact-grid {
