@@ -59,18 +59,18 @@ npm run preview
 
 ## Deployment
 
-The repository is configured for Cloudflare Workers static assets through
-`wrangler.jsonc`.
+Pushes to `main` deploy automatically through Cloudflare Workers Builds.
+The Worker is connected to this GitHub repository with:
 
-1. In the Cloudflare dashboard, create a Worker and connect it to this GitHub
-   repository.
-2. Use `npm run build` as the build command.
-3. Use `npx wrangler deploy` as the deploy command.
-4. Set the `SITE_URL` environment variable to the production URL so canonical
-   links, the sitemap, and `robots.txt` use the correct domain.
+- Build command: `npm run build`
+- Deploy command: `npx wrangler deploy`
+- Root directory: `/`
+- Production branch: `main`
 
 `SITE_URL` is read in `astro.config.mjs`. The fallback is the current
-`workers.dev` URL, so a normal build works without extra configuration.
+`workers.dev` URL, so a normal build works without extra configuration. To pin a
+custom domain, set `SITE_URL` as a build-time environment variable on the
+Workers Builds trigger.
 
 Manual deployment from a local checkout:
 
