@@ -1,0 +1,39 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  index: string;
+  kicker: string;
+  title: string;
+  lede?: string;
+  link?: {
+    href: string;
+    label: string;
+    external?: boolean;
+  };
+}
+
+const { index, kicker, title, lede, link } = Astro.props;
+---
+
+<div class="section-head">
+  <div class="section-index">
+    <span class="section-number">{index}</span>
+    <span class="section-kicker">{kicker}</span>
+  </div>
+  <div class="section-heading">
+    <h2 class="section-title">{title}</h2>
+    {lede && <p class="section-lede">{lede}</p>}
+    {link && (
+      <a
+        class="text-link"
+        href={link.href}
+        target={link.external ? '_blank' : undefined}
+        rel={link.external ? 'noopener noreferrer' : undefined}
+      >
+        {link.label}
+        <Icon name="arrow-up-right" size={14} />
+      </a>
+    )}
+  </div>
+</div>

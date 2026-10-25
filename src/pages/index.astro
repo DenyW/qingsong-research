@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HomeSections from '../components/HomeSections.astro';
+import { site } from '../data/site';
+import { t } from '../i18n/ui';
+
+const lang = 'en' as const;
+const base = Astro.site ?? new URL(site.url);
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.name,
+  url: base.toString(),
+  jobTitle: site.role.en,
+  email: site.email,
+  sameAs: site.socials
+    .filter((social) => social.kind !== 'email')
+    .map((social) => social.href),
+  knowsAbout: [
+    '3D woven fabrics',
+    'Textile composites',
+    'Ballistic impact',
+    'Finite element analysis',
+    'Impact damage',
+  ],
+  knowsLanguage: ['en', 'zh-Hans'],
+};
+---
+
+<BaseLayout
+  lang={lang}
+  title={undefined}
+  description={t(lang, 'site.description')}
+  jsonLd={personSchema}
+>
+  <HomeSections lang={lang} />
+</BaseLayout>

@@ -1,0 +1,58 @@
+---
+import type { Lang } from '../data/site';
+import { site } from '../data/site';
+import { t } from '../i18n/ui';
+import Icon from './Icon.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const profiles = site.socials.filter((social) => social.kind !== 'email');
+---
+
+<section id="contact" class="contact">
+  <div class="container contact-inner">
+    <div class="contact-grid">
+      <div class="contact-heading">
+        <div class="contact-kicker mono">06 — {t(lang, 'section.contact')}</div>
+        <h2 class="contact-title">{site.contact.title[lang]}</h2>
+        <span class="contact-availability">
+          <span class="status-dot" aria-hidden="true"></span>
+          {t(lang, 'contact.availability')}
+        </span>
+      </div>
+
+      <div class="contact-body">
+        <p>{site.contact.body[lang]}</p>
+
+        <a class="contact-email" href={`mailto:${site.email}`}>
+          <span class="contact-email-label mono">{t(lang, 'contact.email')}</span>
+          <span class="contact-email-value">{site.email}</span>
+          <Icon name="arrow-up-right" size={22} />
+        </a>
+
+        <div class="contact-meta">
+          <div class="contact-meta-item">
+            <span class="mono">{t(lang, 'contact.location')}</span>
+            <span>{site.location[lang]}</span>
+          </div>
+          <div class="contact-meta-item">
+            <span class="mono">{t(lang, 'contact.elsewhere')}</span>
+            <div class="contact-socials">
+              {profiles.map((profile) => (
+                <a href={profile.href} target="_blank" rel="noopener noreferrer">
+                  {profile.label}
+                  <Icon name="arrow-up-right" size={13} />
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-mark" aria-hidden="true">Q</div>
+  </div>
+</section>

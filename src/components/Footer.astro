@@ -1,0 +1,88 @@
+---
+import type { Lang } from '../data/site';
+import { site } from '../data/site';
+import { homePath, insightsPath, publicationsPath } from '../i18n/utils';
+import { t } from '../i18n/ui';
+import Icon from './Icon.astro';
+import LanguageToggle from './LanguageToggle.astro';
+
+interface Props {
+  lang: Lang;
+  pathname: string;
+}
+
+const { lang, pathname } = Astro.props;
+const home = homePath(lang);
+const notes = insightsPath(lang);
+const papers = publicationsPath(lang);
+const year = new Date().getFullYear();
+const rssHref = lang === 'zh' ? '/zh/rss.xml' : '/rss.xml';
+
+const nav = [
+  { label: t(lang, 'nav.research'), href: `${home}#research` },
+  { label: t(lang, 'nav.publications'), href: papers },
+  { label: t(lang, 'nav.projects'), href: `${home}#projects` },
+  { label: t(lang, 'nav.insights'), href: notes },
+  { label: t(lang, 'nav.experience'), href: `${home}#experience` },
+  { label: t(lang, 'nav.contact'), href: `${home}#contact` },
+];
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="brand brand--footer" href={home} aria-label={`${site.name} — ${t(lang, 'nav.home')}`}>
+          <span class="brand-mark" aria-hidden="true">Q</span>
+          <span class="brand-text">
+            <span class="brand-name">{site.name}</span>
+            <span class="brand-sub">Research</span>
+          </span>
+        </a>
+        <p class="footer-tagline">{site.tagline[lang]}</p>
+      </div>
+
+      <nav class="footer-nav" aria-label={t(lang, 'a11y.footerNav')}>
+        {nav.map((item) => (
+          <a href={item.href}>{item.label}</a>
+        ))}
+      </nav>
+
+      <div class="footer-links">
+        {site.socials.map((social) => (
+          <a
+            href={social.href}
+            target={social.kind === 'email' ? undefined : '_blank'}
+            rel={social.kind === 'email' ? undefined : 'noopener noreferrer'}
+          >
+            {social.label}
+            <Icon name={social.kind === 'email' ? 'mail' : 'arrow-up-right'} size={13} />
+          </a>
+        ))}
+        <a href={rssHref}>
+          RSS
+          <Icon name="rss" size={13} />
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© {year} {site.name}. {t(lang, 'footer.rights')}</p>
+      <p>{t(lang, 'footer.built')}</p>
+      <p>
+        <a href="https://github.com/DenyW/qingsong-research" target="_blank" rel="noopener noreferrer">
+          {t(lang, 'footer.source')}
+        </a>
+        <span class="footer-sep" aria-hidden="true">·</span>
+        <span>{t(lang, 'footer.license')}</span>
+      </p>
+      <div class="footer-bottom-actions">
+        <LanguageToggle lang={lang} pathname={pathname} />
+        <a class="back-to-top" href="#main">
+          {t(lang, 'footer.top')}
+          <Icon name="arrow-down" size={13} class="back-to-top-icon" />
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>

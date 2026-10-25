@@ -1,0 +1,88 @@
+---
+import type { Lang } from '../data/site';
+import { site } from '../data/site';
+import { homePath, insightsPath } from '../i18n/utils';
+import { t } from '../i18n/ui';
+import Icon from './Icon.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const home = homePath(lang);
+const notes = insightsPath(lang);
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="container">
+    <div class="hero-eyebrow">
+      <span class="status-pill">
+        <span class="status-dot" aria-hidden="true"></span>
+        {t(lang, 'hero.status')}
+      </span>
+      <span class="eyebrow-rule" aria-hidden="true"></span>
+      <span class="mono hero-eyebrow-text">{t(lang, 'hero.eyebrow')}</span>
+    </div>
+
+    <div class="hero-grid">
+      <div class="hero-main">
+        <h1 id="hero-title" class="hero-name">
+          {site.givenName} <span class="hero-name-last">{site.familyName}<span class="hero-dot" aria-hidden="true">.</span></span>
+        </h1>
+        <p class="hero-tagline">{site.tagline[lang]}</p>
+        <p class="hero-role mono">{site.role[lang]}</p>
+        <p class="hero-intro">{site.intro[lang]}</p>
+
+        <div class="hero-actions">
+          <a class="button" href={`${home}#research`}>
+            {t(lang, 'hero.ctaResearch')}
+            <Icon name="arrow-down" size={15} />
+          </a>
+          <a class="button button-ghost" href={notes}>
+            {t(lang, 'hero.ctaNotes')}
+            <Icon name="arrow-up-right" size={15} />
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-aside">
+        <figure class="portrait-card">
+          <div class="portrait-frame">
+            <img
+              src={site.portrait.src}
+              alt={site.portrait.alt[lang]}
+              width="800"
+              height="1000"
+              loading="eager"
+              fetchpriority="high"
+            />
+            <span class="portrait-stamp" aria-hidden="true">
+              <span>OPEN</span>
+              <span>RESEARCH</span>
+              <span>2026</span>
+            </span>
+          </div>
+          <figcaption class="portrait-caption">
+            <span>{site.portrait.caption[lang]}</span>
+            <span class="mono">EN / 中文</span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="now-strip" aria-label={t(lang, 'hero.now')}>
+      <div class="now-label mono">{t(lang, 'hero.now')}</div>
+      {site.now.map((item) => (
+        <div class="now-item">
+          <span class="now-key mono">{item.label[lang]}</span>
+          <span class="now-value">{item.value[lang]}</span>
+        </div>
+      ))}
+      <a class="now-scroll" href="#research" aria-label={t(lang, 'hero.scroll')}>
+        <span class="mono">{t(lang, 'hero.scroll')}</span>
+        <span class="scroll-line" aria-hidden="true"></span>
+      </a>
+    </div>
+  </div>
+</section>

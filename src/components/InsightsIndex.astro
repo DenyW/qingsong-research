@@ -1,0 +1,86 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import type { Lang } from '../data/site';
+import { site } from '../data/site';
+import { formatInsightDate, insightsByDate } from '../data/insights';
+import { insightPath } from '../i18n/utils';
+import { t } from '../i18n/ui';
+import Icon from './Icon.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const base = Astro.site ?? new URL(site.url);
+const rssHref = lang === 'zh' ? '/zh/rss.xml' : '/rss.xml';
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: t(lang, 'insights.pageTitle'),
+  description: t(lang, 'insights.pageLede'),
+  url: new URL(lang === 'zh' ? '/zh/insights/' : '/insights/', base).toString(),
+  inLanguage: lang === 'zh' ? 'zh-Hans' : 'en',
+  hasPart: insightsByDate.map((post) => ({
+    '@type': 'BlogPosting',
+    headline: post.title[lang],
+    datePublished: post.date,
+    url: new URL(insightPath(post.slug, lang), base).toString(),
+  })),
+};
+---
+
+<BaseLayout
+  lang={lang}
+  title={t(lang, 'meta.insightsTitle')}
+  description={t(lang, 'meta.insightsDescription')}
+  jsonLd={schema}
+>
+  <section class="page-header">
+    <div class="container">
+      <div class="page-kicker mono">04 — {t(lang, 'section.insights')}</div>
+      <div class="page-header-grid">
+        <h1 class="page-title">{t(lang, 'insights.pageTitle')}</h1>
+        <div class="page-header-aside">
+          <p class="page-lede">{t(lang, 'insights.pageLede')}</p>
+          <a class="text-link" href={rssHref}>
+            {t(lang, 'insights.rss')}
+            <Icon name="rss" size={14} />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="notes-section">
+    <div class="container">
+      {insightsByDate.length > 0 ? (
+        <div class="notes-list">
+          {insightsByDate.map((post, index) => (
+            <a class="notes-row" href={insightPath(post.slug, lang)}>
+              <div class="notes-index mono">{String(index + 1).padStart(2, '0')}</div>
+              <div class="notes-meta">
+                <time datetime={post.date}>{formatInsightDate(post.date, lang)}</time>
+                <span>{post.readingTime} {t(lang, 'insights.minRead')}</span>
+              </div>
+              <div class="notes-main">
+                <h2>{post.title[lang]}</h2>
+                <p>{post.excerpt[lang]}</p>
+                <ul class="tag-list">
+                  {post.tags[lang].map((tag) => (
+                    <li>{tag}</li>
+                  ))}
+                </ul>
+              </div>
+              <span class="notes-arrow" aria-hidden="true">
+                <Icon name="arrow-up-right" size={22} />
+              </span>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <p class="empty-state">{t(lang, 'insights.empty')}</p>
+      )}
+    </div>
+  </section>
+</BaseLayout>

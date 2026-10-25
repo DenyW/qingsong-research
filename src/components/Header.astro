@@ -1,0 +1,97 @@
+---
+import type { Lang } from '../data/site';
+import { site } from '../data/site';
+import { homePath, insightsPath, publicationsPath } from '../i18n/utils';
+import { t, type UIKey } from '../i18n/ui';
+import Icon from './Icon.astro';
+import LanguageToggle from './LanguageToggle.astro';
+
+interface Props {
+  lang: Lang;
+  pathname: string;
+}
+
+const { lang, pathname } = Astro.props;
+const home = homePath(lang);
+const notes = insightsPath(lang);
+const papers = publicationsPath(lang);
+
+const nav: Array<{ key: UIKey; href: string; current?: boolean }> = [
+  { key: 'nav.research', href: `${home}#research` },
+  { key: 'nav.publications', href: papers, current: pathname.includes('/publications') },
+  { key: 'nav.projects', href: `${home}#projects` },
+  { key: 'nav.insights', href: notes, current: pathname.includes('/insights') },
+  { key: 'nav.experience', href: `${home}#experience` },
+];
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href={home} aria-label={`${site.name} — ${t(lang, 'nav.home')}`}>
+      <span class="brand-mark" aria-hidden="true">Q</span>
+      <span class="brand-text">
+        <span class="brand-name">{site.name}</span>
+        <span class="brand-sub">Research</span>
+      </span>
+    </a>
+
+    <nav class="primary-nav" aria-label={t(lang, 'a11y.mainNav')}>
+      {nav.map((item) => (
+        <a
+          href={item.href}
+          aria-current={item.current ? 'page' : undefined}
+          class:list={{ 'is-current': item.current }}
+        >
+          {t(lang, item.key)}
+        </a>
+      ))}
+    </nav>
+
+    <div class="header-actions">
+      <LanguageToggle lang={lang} pathname={pathname} />
+      <a class="button button-small header-contact" href={`${home}#contact`}>
+        {t(lang, 'nav.contact')}
+        <Icon name="arrow-up-right" size={14} />
+      </a>
+
+      <details class="mobile-menu" data-mobile-menu>
+        <summary aria-label={t(lang, 'a11y.menu')}>
+          <span class="menu-icon" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </span>
+        </summary>
+        <div class="mobile-panel">
+          <nav class="mobile-nav" aria-label={t(lang, 'a11y.mainNav')}>
+            {nav.map((item) => (
+              <a href={item.href} aria-current={item.current ? 'page' : undefined}>
+                <span>{t(lang, item.key)}</span>
+                <Icon name="arrow-up-right" size={18} />
+              </a>
+            ))}
+            <a href={`${home}#contact`}>
+              <span>{t(lang, 'nav.contact')}</span>
+              <Icon name="arrow-up-right" size={18} />
+            </a>
+          </nav>
+          <div class="mobile-panel-footer">
+            <LanguageToggle lang={lang} pathname={pathname} />
+            <span class="mono">EN / 中文</span>
+          </div>
+        </div>
+      </details>
+    </div>
+  </div>
+</header>
+
+<script>
+  document.querySelectorAll<HTMLDetailsElement>('[data-mobile-menu]').forEach((details) => {
+    const close = () => {
+      details.open = false;
+    };
+
+    details.querySelectorAll('a').forEach((link) => link.addEventListener('click', close));
+    details.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') close();
+    });
+  });
+</script>

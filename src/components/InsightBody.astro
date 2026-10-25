@@ -1,0 +1,36 @@
+---
+import type { Lang } from '../data/site';
+import type { InsightBlock } from '../data/insights';
+
+interface Props {
+  blocks: InsightBlock[];
+  lang: Lang;
+}
+
+const { blocks, lang } = Astro.props;
+---
+
+<div class="prose">
+  {blocks.map((block) => {
+    if (block.type === 'h2') {
+      return <h2>{block.text[lang]}</h2>;
+    }
+    if (block.type === 'quote') {
+      return (
+        <blockquote>
+          <p>{block.text[lang]}</p>
+        </blockquote>
+      );
+    }
+    if (block.type === 'list') {
+      return (
+        <ul>
+          {block.items[lang].map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      );
+    }
+    return <p>{block.text[lang]}</p>;
+  })}
+</div>

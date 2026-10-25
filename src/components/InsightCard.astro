@@ -1,0 +1,41 @@
+---
+import type { Lang } from '../data/site';
+import type { Insight } from '../data/insights';
+import { formatInsightDate } from '../data/insights';
+import { insightPath } from '../i18n/utils';
+import { t } from '../i18n/ui';
+import Icon from './Icon.astro';
+
+interface Props {
+  post: Insight;
+  lang: Lang;
+  featured?: boolean;
+}
+
+const { post, lang, featured = false } = Astro.props;
+const href = insightPath(post.slug, lang);
+---
+
+<a class:list={['insight-card', { 'insight-card--featured': featured }]} href={href}>
+  <div class="insight-meta">
+    <time datetime={post.date}>{formatInsightDate(post.date, lang)}</time>
+    <span class="meta-dot" aria-hidden="true"></span>
+    <span>{post.readingTime} {t(lang, 'insights.minRead')}</span>
+  </div>
+
+  <div class="insight-card-body">
+    <h3>{post.title[lang]}</h3>
+    <p>{post.excerpt[lang]}</p>
+  </div>
+
+  <div class="insight-card-footer">
+    <ul class="tag-list">
+      {post.tags[lang].map((tag) => (
+        <li>{tag}</li>
+      ))}
+    </ul>
+    <span class="insight-arrow" aria-hidden="true">
+      <Icon name="arrow-up-right" size={18} />
+    </span>
+  </div>
+</a>

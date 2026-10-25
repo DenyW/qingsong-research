@@ -1,0 +1,112 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import type { Lang } from '../data/site';
+import { site } from '../data/site';
+import type { Insight } from '../data/insights';
+import { formatInsightDate } from '../data/insights';
+import { insightPath, insightsPath } from '../i18n/utils';
+import { t } from '../i18n/ui';
+import Icon from './Icon.astro';
+import InsightBody from './InsightBody.astro';
+
+interface Props {
+  post: Insight;
+  lang: Lang;
+  previous?: Insight;
+  next?: Insight;
+}
+
+const { post, lang, previous, next } = Astro.props;
+const base = Astro.site ?? new URL(site.url);
+const notes = insightsPath(lang);
+const canonical = new URL(insightPath(post.slug, lang), base);
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.title[lang],
+  description: post.excerpt[lang],
+  datePublished: post.date,
+  dateModified: post.date,
+  inLanguage: lang === 'zh' ? 'zh-Hans' : 'en',
+  author: {
+    '@type': 'Person',
+    name: site.name,
+    url: base.toString(),
+  },
+  mainEntityOfPage: canonical.toString(),
+  keywords: post.tags[lang].join(', '),
+  image: new URL('/og.png', base).toString(),
+};
+---
+
+<BaseLayout
+  lang={lang}
+  title={post.title[lang]}
+  description={post.excerpt[lang]}
+  type="article"
+  jsonLd={schema}
+>
+  <div class="reading-progress" aria-hidden="true"></div>
+
+  <article class="article">
+    <header class="article-header container-narrow">
+      <a class="back-link" href={notes}>
+        <Icon name="arrow-left" size={15} />
+        {t(lang, 'insights.back')}
+      </a>
+
+      <div class="article-meta">
+        <time datetime={post.date}>{formatInsightDate(post.date, lang)}</time>
+        <span class="meta-dot" aria-hidden="true"></span>
+        <span>{post.readingTime} {t(lang, 'insights.minRead')}</span>
+      </div>
+
+      <h1 class="article-title">{post.title[lang]}</h1>
+      <p class="article-lede">{post.excerpt[lang]}</p>
+
+      <ul class="tag-list article-tags">
+        {post.tags[lang].map((tag) => (
+          <li>{tag}</li>
+        ))}
+      </ul>
+    </header>
+
+    <div class="article-body container-narrow">
+      <InsightBody blocks={post.body} lang={lang} />
+    </div>
+
+    <footer class="article-footer container-narrow">
+      <div class="article-end">
+        <span class="article-end-mark" aria-hidden="true">Q</span>
+        <span class="mono">{site.name} · {formatInsightDate(post.date, lang)}</span>
+      </div>
+
+      {(previous || next) && (
+        <nav class="article-nav" aria-label="Notes">
+          {previous ? (
+            <a class="article-nav-item" href={insightPath(previous.slug, lang)}>
+              <span class="mono">{t(lang, 'insights.prev')}</span>
+              <span class="article-nav-title">{previous.title[lang]}</span>
+            </a>
+          ) : (
+            <span />
+          )}
+          {next ? (
+            <a class="article-nav-item article-nav-item--next" href={insightPath(next.slug, lang)}>
+              <span class="mono">{t(lang, 'insights.next')}</span>
+              <span class="article-nav-title">{next.title[lang]}</span>
+            </a>
+          ) : (
+            <span />
+          )}
+        </nav>
+      )}
+
+      <a class="text-link article-back-all" href={notes}>
+        <Icon name="arrow-left" size={14} />
+        {t(lang, 'insights.back')}
+      </a>
+    </footer>
+  </article>
+</BaseLayout>

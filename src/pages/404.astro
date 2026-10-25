@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getLangFromUrl, homePath, insightsPath } from '../i18n/utils';
+import { t } from '../i18n/ui';
+import Icon from '../components/Icon.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const home = homePath(lang);
+const notes = insightsPath(lang);
+---
+
+<BaseLayout
+  lang={lang}
+  title={t(lang, 'meta.notFoundTitle')}
+  description={t(lang, 'notFound.body')}
+  noindex
+>
+  <section class="not-found">
+    <div class="container not-found-inner">
+      <div class="not-found-kicker mono">{t(lang, 'notFound.kicker')}</div>
+      <div class="not-found-grid">
+        <div class="not-found-number" aria-hidden="true">404</div>
+        <div class="not-found-copy">
+          <h1>{t(lang, 'notFound.title')}</h1>
+          <p>{t(lang, 'notFound.body')}</p>
+          <div class="not-found-actions">
+            <a class="button" href={home}>
+              {t(lang, 'notFound.home')}
+              <Icon name="arrow-right" size={15} />
+            </a>
+            <a class="button button-ghost" href={notes}>
+              {t(lang, 'notFound.notes')}
+              <Icon name="arrow-up-right" size={15} />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,178 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import type { Lang } from '../data/site';
+import { site } from '../data/site';
+import {
+  publicationYears,
+  publications,
+  publicationsByYear,
+} from '../data/publications';
+import { t } from '../i18n/ui';
+import Icon from './Icon.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const base = Astro.site ?? new URL(site.url);
+const pageUrl = new URL(lang === 'zh' ? '/zh/publications/' : '/publications/', base);
+const total = publications.length;
+const firstAuthorCount = publications.filter(
+  (publication) => publication.authors[0] === site.name,
+).length;
+const firstYear = Math.min(...publications.map((publication) => publication.year));
+const lastYear = Math.max(...publications.map((publication) => publication.year));
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: t(lang, 'publications.pageTitle'),
+  description: t(lang, 'publications.pageLede'),
+  url: pageUrl.toString(),
+  inLanguage: lang === 'zh' ? 'zh-Hans' : 'en',
+  mainEntity: {
+    '@type': 'ItemList',
+    numberOfItems: total,
+    itemListElement: publications.map((publication, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      item: {
+        '@type': 'ScholarlyArticle',
+        headline: publication.title,
+        author: publication.authors.map((author) => ({ '@type': 'Person', name: author })),
+        datePublished: String(publication.year),
+        isPartOf: { '@type': 'Periodical', name: publication.venue },
+        ...(publication.doi ? { sameAs: `https://doi.org/${publication.doi}` } : {}),
+      },
+    })),
+  },
+};
+---
+
+<BaseLayout
+  lang={lang}
+  title={t(lang, 'meta.publicationsTitle')}
+  description={t(lang, 'meta.publicationsDescription')}
+  jsonLd={schema}
+>
+  <section class="page-header">
+    <div class="container">
+      <div class="page-kicker mono">02 — {t(lang, 'section.publications')}</div>
+      <div class="page-header-grid page-header-grid--publications">
+        <div>
+          <h1 class="page-title">{t(lang, 'publications.pageTitle')}</h1>
+          <p class="page-lede">{t(lang, 'publications.pageLede')}</p>
+        </div>
+        <dl class="pub-stats">
+          <div class="pub-stat">
+            <dt class="mono">{t(lang, 'publications.statsWorks')}</dt>
+            <dd>{total}</dd>
+          </div>
+          <div class="pub-stat">
+            <dt class="mono">{t(lang, 'publications.statsFirst')}</dt>
+            <dd>{firstAuthorCount}</dd>
+          </div>
+          <div class="pub-stat">
+            <dt class="mono">{t(lang, 'publications.statsYears')}</dt>
+            <dd class="pub-stat-range">{firstYear}–{lastYear}</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="publications-page">
+    <div class="container">
+      <div class="pub-toolbar">
+        <p class="pub-source-note">{t(lang, 'publications.sourceNote')}</p>
+        <span class="mono pub-updated">{t(lang, 'publications.updated')}</span>
+      </div>
+
+      {publicationYears.map((year) => (
+        <section class="pub-year-group" aria-labelledby={`year-${year}`}>
+          <div class="pub-year-head">
+            <h2 id={`year-${year}`}>{year}</h2>
+            <span class="mono">
+              {publicationsByYear[year].length} {t(lang, 'publications.works')}
+            </span>
+          </div>
+
+          <ol class="publication-list publication-list--page">
+            {publicationsByYear[year].map((publication, index) => (
+              <li class="publication-item publication-item--page">
+                <span class="mono publication-index">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <div class="publication-main">
+                  <h3>
+                    {publication.doi ? (
+                      <a
+                        href={`https://doi.org/${publication.doi}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {publication.title}
+                      </a>
+                    ) : (
+                      publication.title
+                    )}
+                  </h3>
+                  <p class="publication-authors">
+                    {publication.authors.map((author, authorIndex) => (
+                      <span class:list={['publication-author', { 'is-self': author === site.name }]}>
+                        {author}{authorIndex < publication.authors.length - 1 ? ', ' : ''}
+                      </span>
+                    ))}
+                  </p>
+                  <p class="publication-venue">
+                    <span>{publication.venue}</span>
+                    <span aria-hidden="true">·</span>
+                    <span>{publication.year}</span>
+                    {publication.volume && (
+                      <>
+                        <span aria-hidden="true">·</span>
+                        <span>
+                          Vol. {publication.volume}
+                          {publication.issue ? `(${publication.issue})` : ''}
+                        </span>
+                      </>
+                    )}
+                    {publication.pages && (
+                      <>
+                        <span aria-hidden="true">·</span>
+                        <span>{publication.pages}</span>
+                      </>
+                    )}
+                  </p>
+                  {publication.doi && (
+                    <a
+                      class="publication-doi"
+                      href={`https://doi.org/${publication.doi}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <span class="mono">DOI</span>
+                      <span>{publication.doi}</span>
+                    </a>
+                  )}
+                </div>
+                {publication.doi && (
+                  <a
+                    class="publication-link"
+                    href={`https://doi.org/${publication.doi}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${t(lang, 'publications.read')}: ${publication.title}`}
+                  >
+                    <Icon name="arrow-up-right" size={18} />
+                  </a>
+                )}
+              </li>
+            ))}
+          </ol>
+        </section>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

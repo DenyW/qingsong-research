@@ -1,0 +1,58 @@
+---
+import type { Lang } from '../data/site';
+import { site } from '../data/site';
+import { t } from '../i18n/ui';
+import Icon from './Icon.astro';
+import SectionHead from './SectionHead.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+<section id="projects" class="section section--projects">
+  <div class="container">
+    <SectionHead
+      index="03"
+      kicker={t(lang, 'section.projects')}
+      title={t(lang, 'section.projectsTitle')}
+      link={{
+        href: 'https://github.com/DenyW',
+        label: t(lang, 'projects.github'),
+        external: true,
+      }}
+    />
+
+    <div class="project-list">
+      {site.projects.map((project, index) => (
+        <a
+          class="project-row"
+          href={project.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${project.name} — ${t(lang, 'projects.view')} (${t(lang, 'a11y.external')})`}
+        >
+          <span class="project-index mono">{String(index + 1).padStart(2, '0')}</span>
+          <div class="project-main">
+            <div class="project-title-line">
+              <h3>{project.name}</h3>
+              <span class="project-status mono">{project.status[lang]}</span>
+            </div>
+            <p>{project.description[lang]}</p>
+          </div>
+          <ul class="tag-list project-tags">
+            {project.tags.map((tag) => (
+              <li>{tag}</li>
+            ))}
+          </ul>
+          <span class="project-year mono">{project.year}</span>
+          <span class="project-arrow" aria-hidden="true">
+            <Icon name="arrow-up-right" size={20} />
+          </span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
