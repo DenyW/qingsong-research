@@ -28,15 +28,19 @@ The site only publishes information that can be checked against a public record
 or a document supplied by Qingsong Wei.
 
 - [ORCID record 0000-0001-6164-350X](https://orcid.org/0000-0001-6164-350X)
+- [LinkedIn profile](https://www.linkedin.com/in/qingsong-wei-12a410237/)
 - [ResearchGate profile](https://www.researchgate.net/profile/Qingsong-Wei-3)
 - [Crossref](https://www.crossref.org/) metadata for publication details
 - Curriculum vitae, August 2026, for the current appointment, education,
-  research funding, patents, technical skills, and service roles
+  research funding, patent numbers, technical skills, and service roles
+- [Google Patents](https://patents.google.com/) for patent titles, application
+  numbers, dates, assignees, and legal status
 - Public GitHub repositories for the projects section
 
 Publication titles, author order, journal names, volumes, and DOIs follow the
-Crossref record. Employment, education, funding, and patent details follow the
-CV and ORCID record.
+Crossref record. Employment, education, funding, and service details follow the
+CV and ORCID record. Patent records follow the CV and were checked against
+Google Patents in October 2026.
 
 ## Local development
 

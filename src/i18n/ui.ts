@@ -42,7 +42,7 @@ const en = {
   'section.funding': 'Funding & patents',
   'section.fundingTitle': 'Work behind the papers',
   'section.fundingLede':
-    'Research funding, patents, and the methods that support the modelling and experiments. Details follow the CV updated in August 2026.',
+    'Research funding, patents, and the methods that support the modelling and experiments. Funding follows the CV updated in August 2026; patent records and legal status follow Google Patents.',
   'section.contact': 'Contact',
 
   'publications.verified': 'Verified against ORCID & Crossref',
@@ -72,7 +72,8 @@ const en = {
   'funding.methods': 'Methods & tools',
   'funding.pi': 'PI',
   'funding.coi': 'Co-I',
-  'funding.source': 'Source: CV, August 2026.',
+  'funding.source':
+    'Sources: CV (August 2026); patent data and status via Google Patents (October 2026).',
 
   'projects.github': 'More on GitHub',
   'projects.view': 'View project',
@@ -160,7 +161,7 @@ const zh: Record<keyof typeof en, string> = {
   'section.funding': '经费与专利',
   'section.fundingTitle': '论文背后的工作',
   'section.fundingLede':
-    '研究经费、专利，以及支撑建模与实验的方法。信息依据 2026 年 8 月更新的简历。',
+    '研究经费、专利，以及支撑建模与实验的方法。经费信息依据 2026 年 8 月更新的简历；专利记录与法律状态依据 Google Patents。',
   'section.contact': '联系',
 
   'publications.verified': '经 ORCID 与 Crossref 核验',
@@ -190,7 +191,7 @@ const zh: Record<keyof typeof en, string> = {
   'funding.methods': '方法与工具',
   'funding.pi': '主持',
   'funding.coi': '参与',
-  'funding.source': '来源：2026 年 8 月简历。',
+  'funding.source': '来源：2026 年 8 月简历；专利数据与状态来自 Google Patents（2026 年 10 月）。',
 
   'projects.github': '更多 GitHub 项目',
   'projects.view': '查看项目',

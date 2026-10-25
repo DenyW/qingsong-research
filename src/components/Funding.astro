@@ -2,6 +2,7 @@
 import type { Lang } from '../data/site';
 import { site } from '../data/site';
 import { t } from '../i18n/ui';
+import Icon from './Icon.astro';
 import SectionHead from './SectionHead.astro';
 
 interface Props {
@@ -58,9 +59,31 @@ const { lang } = Astro.props;
           {site.patents.map((patent, index) => (
             <li class="patent-item">
               <span class="mono patent-index">{String(index + 1).padStart(2, '0')}</span>
-              <div>
+              <div class="patent-body">
+                <div class="patent-topline">
+                  <span class:list={['patent-status', `is-${patent.status.toLowerCase()}`]}>
+                    {patent.status}
+                  </span>
+                  <span class="mono patent-filed">Filed {patent.filed}</span>
+                </div>
                 <h4>{patent.title}</h4>
-                <p class="mono patent-number">{patent.number}</p>
+                <p class="mono patent-number">
+                  {patent.number} · App. {patent.application}
+                </p>
+                <p class="patent-status-note">{patent.statusNote}</p>
+                <p class="patent-assignee">
+                  <span>{patent.assignee}</span>
+                  <span aria-hidden="true">·</span>
+                  <a
+                    class="patent-link"
+                    href={patent.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Google Patents
+                    <Icon name="arrow-up-right" size={11} />
+                  </a>
+                </p>
               </div>
             </li>
           ))}

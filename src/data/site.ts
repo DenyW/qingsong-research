@@ -6,7 +6,7 @@ export interface SocialLink {
   label: string;
   href: string;
   handle: string;
-  kind: 'orcid' | 'researchgate' | 'github' | 'email';
+  kind: 'orcid' | 'linkedin' | 'researchgate' | 'github' | 'email';
 }
 
 export interface NowItem {
@@ -50,6 +50,12 @@ export interface FundingItem {
 export interface PatentItem {
   title: string;
   number: string;
+  application: string;
+  filed: string;
+  status: 'Granted' | 'Pending' | 'Expired';
+  statusNote: string;
+  assignee: string;
+  href: string;
 }
 
 export interface SkillGroup {
@@ -104,6 +110,12 @@ export const site = {
       href: 'https://orcid.org/0000-0001-6164-350X',
       handle: '0000-0001-6164-350X',
       kind: 'orcid',
+    },
+    {
+      label: 'LinkedIn',
+      href: 'https://www.linkedin.com/in/qingsong-wei-12a410237/',
+      handle: 'in/qingsong-wei-12a410237',
+      kind: 'linkedin',
     },
     {
       label: 'ResearchGate',
@@ -377,20 +389,45 @@ export const site = {
   ] satisfies FundingItem[],
   patents: [
     {
-      title: 'Wraparound Bulletproof and Stab-Resistant Backpack',
-      number: 'CN 201920255550.6',
+      title:
+        'An experimental testing method and apparatus for determining the impact resistance of fabrics',
+      number: 'CN120142045B',
+      application: 'CN202510298810.8',
+      filed: '13 Mar 2025',
+      status: 'Granted',
+      statusNote: 'Published 13 Jun 2025 · granted 18 Nov 2025 · active',
+      assignee: 'Zhejiang Sci-Tech University',
+      href: 'https://patents.google.com/patent/CN120142045B/en',
     },
     {
-      title: 'Production Process of Seamless Integrated Bulletproof Helmet',
-      number: 'CN 119753913A',
+      title: 'Production process of seamless one-piece bulletproof helmet',
+      number: 'CN119753913A',
+      application: 'CN202510052858.0',
+      filed: '14 Jan 2025',
+      status: 'Pending',
+      statusNote: 'Published 4 Apr 2025 · rejection issued 26 Jun 2026',
+      assignee: 'Zhejiang Sci-Tech University',
+      href: 'https://patents.google.com/patent/CN119753913A/en',
     },
     {
-      title: 'Experimental Testing Method and Device for Fabric Impact Resistance',
-      number: 'CN 120142045A',
+      title: 'A three-way woven bulletproof structure',
+      number: 'CN119374415A',
+      application: 'CN202411852079.0',
+      filed: '16 Dec 2024',
+      status: 'Pending',
+      statusNote: 'Published 28 Jan 2025 · under examination',
+      assignee: 'Zhejiang Sci-Tech University',
+      href: 'https://patents.google.com/patent/CN119374415A/en',
     },
     {
-      title: 'Three-Directional Braided Bulletproof Structure',
-      number: 'CN 119374415A',
+      title: 'Surrounding type bulletproof and stab-resistant schoolbag',
+      number: 'CN210008649U',
+      application: 'CN201920255550.6U',
+      filed: '28 Feb 2019',
+      status: 'Expired',
+      statusNote: 'Granted 4 Feb 2020 · expired 28 Feb 2023 (annual fee)',
+      assignee: 'Donghua University',
+      href: 'https://patents.google.com/patent/CN210008649U/en',
     },
   ] satisfies PatentItem[],
   skills: [
