@@ -2,9 +2,10 @@
 
 The personal research website of **Qingsong Wei**, built with
 [Astro](https://astro.build) and deployed as static assets on
-[Cloudflare Workers](https://workers.cloudflare.com).
+[Cloudflare Pages](https://pages.cloudflare.com).
 
-- Live site: <https://qingsong-research.qsw-wei.workers.dev>
+- Live site: <https://qswlab.pages.dev>
+- Fallback: <https://qingsong-research.qsw-wei.workers.dev>
 - GitHub: <https://github.com/DenyW/qingsong-research>
 - Language: English
 
@@ -67,20 +68,33 @@ npm run preview
 
 ## Deployment
 
-Pushes to `main` deploy automatically through Cloudflare Workers Builds.
-The Worker is connected to this GitHub repository with:
+The primary site is the Cloudflare Pages project `qswlab`, available at
+<https://qswlab.pages.dev>. Pushes to `main` deploy automatically through the
+Pages Git integration with:
 
 - Build command: `npm run build`
-- Deploy command: `npx wrangler deploy`
+- Build output directory: `dist`
 - Root directory: `/`
 - Production branch: `main`
 
-`SITE_URL` is read in `astro.config.mjs`. The fallback is the current
-`workers.dev` URL, so a normal build works without extra configuration. To pin a
-custom domain, set `SITE_URL` as a build-time environment variable on the
-Workers Builds trigger.
+The Cloudflare Worker `qingsong-research` remains available as a fallback at
+<https://qingsong-research.qsw-wei.workers.dev>. It is still connected to
+Workers Builds with build command `npm run build` and deploy command
+`npx wrangler deploy`.
 
-Manual deployment from a local checkout:
+`SITE_URL` is read in `astro.config.mjs`. The fallback is the current
+`pages.dev` URL, so a normal build works without extra configuration. To pin a
+different domain, set `SITE_URL` as a build-time environment variable on the
+Pages project.
+
+Manual Pages deployment from a local checkout:
+
+```bash
+npm run build
+npx wrangler pages deploy dist --project-name=qswlab --branch=main
+```
+
+Manual Worker deployment:
 
 ```bash
 npm run build

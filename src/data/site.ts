@@ -69,7 +69,7 @@ export const site = {
   givenName: 'Qingsong',
   familyName: 'Wei',
   initials: 'Q',
-  url: 'https://qingsong-research.qsw-wei.workers.dev',
+  url: 'https://qswlab.pages.dev',
   email: 'wqs@zstu.edu.cn',
   location,
   role: {

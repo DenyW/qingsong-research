@@ -1,7 +1,7 @@
 import type { APIContext } from 'astro';
 
 export function GET(context: APIContext) {
-  const site = context.site ?? new URL('https://qingsong-research.qsw-wei.workers.dev');
+  const site = context.site ?? new URL('https://qswlab.pages.dev');
   const sitemap = new URL('sitemap-index.xml', site);
 
   return new Response(
